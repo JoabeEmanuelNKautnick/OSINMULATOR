@@ -1,0 +1,95 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
+html, body, #root { height: 100%; }
+body { background: #0b0f14; color: #e8edf2; -webkit-font-smoothing: antialiased; }
+button { font-family: inherit; cursor: pointer; }
+a { text-decoration: none; color: inherit; }
+
+/* ===== Landing ===== */
+.landing {
+  min-height: 100%; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; text-align: center; padding: 24px 16px; gap: 10px;
+  background: radial-gradient(120% 80% at 50% 0%, #15202b 0%, #0b0f14 70%);
+}
+.landing h1 { font-size: 34px; letter-spacing: -0.5px; }
+.landing > p { color: #9fb0c0; max-width: 460px; }
+.landing-cards { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin: 22px 0; }
+.lc {
+  width: 240px; padding: 24px; border-radius: 18px; display: flex; flex-direction: column;
+  gap: 8px; align-items: center; border: 1px solid #243040; background: #121a23;
+  transition: transform .15s, border-color .15s;
+}
+.lc:hover { transform: translateY(-4px); border-color: #3a7bd5; }
+.lc-ico { font-size: 44px; }
+.lc b { font-size: 20px; }
+.lc small { color: #8fa0b0; line-height: 1.4; }
+.lc-phone:hover { border-color: #d6336c; }
+.lc-kali:hover { border-color: #39d98a; }
+.landing-foot { color: #5f6f7f; font-size: 13px; }
+
+/* ===== Apps compartilhados ===== */
+.photo { width: 100%; aspect-ratio: 1 / 1; background: #0e141b; overflow: hidden; }
+.photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.fg-avatar img, .fg-mini img, .gc-avatar img, .ca-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+
+/* Fotogram */
+.fg { background: #fff; color: #111; min-height: 100%; }
+.fg-top { padding: 12px 14px; border-bottom: 1px solid #eee; position: sticky; top: 0; background: #fff; z-index: 2; }
+.fg-logo { font-weight: 700; font-size: 20px; background: linear-gradient(45deg,#f09433,#dc2743,#bc1888); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.fg-profile { display: flex; align-items: center; gap: 18px; padding: 14px; }
+.fg-avatar { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(45deg,#f9ce34,#ee2a7b,#6228d7); display: grid; place-items: center; font-size: 30px; }
+.fg-stats { display: flex; gap: 20px; }
+.fg-stats div { display: flex; flex-direction: column; align-items: center; font-size: 13px; color: #555; }
+.fg-stats b { color: #111; font-size: 16px; }
+.fg-bio { padding: 0 14px 12px; font-size: 14px; }
+.fg-bio p { color: #333; margin-top: 2px; }
+.fg-post { border-top: 8px solid #fafafa; }
+.fg-post.hl { outline: 3px solid #d6336c; outline-offset: -3px; animation: pulse 1.4s ease-in-out infinite; }
+.fg-post-head { display: flex; align-items: center; gap: 10px; padding: 10px 12px; }
+.fg-mini { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(45deg,#f9ce34,#ee2a7b); display: grid; place-items: center; }
+.fg-post-head b { font-size: 14px; }
+.fg-loc { display: block; font-size: 11px; color: #888; }
+.fg-actions { padding: 8px 12px; font-size: 14px; color: #333; }
+.fg-cap { padding: 0 12px 6px; font-size: 14px; line-height: 1.4; }
+.fg-comment { padding: 1px 12px; font-size: 13px; color: #333; }
+.fg-comment b { color: #111; }
+.fg-date { padding: 6px 12px 12px; font-size: 11px; color: #999; text-transform: uppercase; }
+
+/* CorreApp */
+.ca { background: #f3f5f7; color: #111; min-height: 100%; }
+.ca-top { padding: 12px 14px; background: #e8491d; color: #fff; font-weight: 700; position: sticky; top: 0; z-index: 2; }
+.ca-logo { font-size: 18px; }
+.ca-profile { display: flex; align-items: center; gap: 14px; padding: 14px; background: #fff; }
+.ca-avatar { width: 54px; height: 54px; border-radius: 50%; background: #ffe3d6; display: grid; place-items: center; font-size: 26px; }
+.ca-profile p { color: #777; font-size: 13px; }
+.ca-run { background: #fff; margin: 10px; border-radius: 14px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+.ca-run.hl { outline: 3px solid #e8491d; animation: pulse 1.4s ease-in-out infinite; }
+.ca-run-head { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 14px 8px; }
+.ca-run-head b { font-size: 15px; }
+.ca-run-head span { font-size: 12px; color: #888; }
+.ca-metrics { display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #f0f0f0; }
+.ca-metrics div { display: flex; flex-direction: column; align-items: center; }
+.ca-metrics b { font-size: 17px; }
+.ca-metrics span { font-size: 11px; color: #999; }
+.ca-place { padding: 10px 14px; font-size: 13px; color: #c0392b; background: #fff5f1; }
+.rmap { display: block; }
+
+/* GameChat */
+.gc { background: #313338; color: #dbdee1; min-height: 100%; display: flex; flex-direction: column; }
+.gc-top { padding: 12px 14px; background: #2b2d31; font-weight: 600; box-shadow: 0 1px 0 #1f2023; position: sticky; top: 0; z-index: 2; }
+.gc-profile { display: flex; gap: 14px; padding: 16px 14px; background: #2b2d31; margin: 10px; border-radius: 10px; }
+.gc-avatar { width: 56px; height: 56px; border-radius: 50%; background: #5865f2; display: grid; place-items: center; font-size: 26px; }
+.gc-id b { display: block; font-size: 16px; color: #fff; }
+.gc-id code { color: #b5bac1; font-size: 13px; }
+.gc-status { display: block; font-size: 13px; color: #23a55a; margin: 4px 0; }
+.gc-id p { font-size: 13px; color: #b5bac1; }
+.gc-id small { color: #80848e; font-size: 11px; }
+.gc-feed { flex: 1; padding: 6px 14px; }
+.gc-msg { padding: 6px 8px; border-radius: 6px; }
+.gc-msg.hl { background: #3f4248; outline: 2px solid #f5a623; animation: pulse 1.4s ease-in-out infinite; }
+.gc-author { font-weight: 600; }
+.gc-time { font-size: 11px; color: #80848e; margin-left: 8px; }
+.gc-text { color: #dbdee1; line-height: 1.4; }
+.gc-bar { margin: 10px; padding: 12px 14px; background: #383a40; border-radius: 10px; color: #80848e; font-size: 14px; }
+
+@keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255,80,80,.0); } 50% { box-shadow: 0 0 0 3px rgba(255,80,80,.35); } }

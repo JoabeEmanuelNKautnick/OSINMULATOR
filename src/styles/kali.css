@@ -1,0 +1,79 @@
+.kali { height: 100%; display: flex; flex-direction: column; background: #0a0e12; color: #c7d3db; font-family: 'Segoe UI', system-ui, sans-serif; }
+.kali-banner { background: #3a1114; color: #ffb3b3; text-align: center; padding: 6px 12px; font-size: 13px; border-bottom: 1px solid #6a1f24; }
+.kali-topbar { display: flex; align-items: center; gap: 14px; padding: 8px 14px; background: #10151b; border-bottom: 1px solid #1d2733; }
+.kali-dragon { font-weight: 700; color: #39d98a; }
+.kali-title { color: #8fa0b0; font-family: monospace; font-size: 13px; }
+.kali-clock { margin-left: auto; color: #8fa0b0; font-family: monospace; }
+
+.kali-body { flex: 1; display: grid; grid-template-columns: 230px 1fr 1fr; gap: 10px; padding: 10px; overflow: hidden; }
+
+/* Sidebar */
+.kali-side { display: flex; flex-direction: column; gap: 16px; overflow-y: auto; }
+.kali-group h4 { font-size: 12px; text-transform: uppercase; color: #5f7384; letter-spacing: 1px; margin-bottom: 8px; }
+.kbtn {
+  display: flex; align-items: center; gap: 8px; width: 100%; text-align: left; padding: 10px 12px;
+  background: #121b24; border: 1px solid #22323f; border-radius: 8px; color: #dbe6ee; font-size: 14px;
+  margin-bottom: 8px; transition: background .12s, border-color .12s;
+}
+.kbtn:hover { background: #17242f; border-color: #39d98a; }
+.kbtn.prime { background: #10361f; border-color: #2f7d53; color: #baffcf; font-weight: 600; }
+.kbtn.attack:hover { border-color: #ff7a5a; }
+.kbtn kbd { margin-left: auto; background: #0a0e12; border: 1px solid #2a3a47; border-radius: 4px; padding: 1px 6px; font-size: 11px; color: #8fa0b0; }
+.kali-subbtns { display: flex; flex-direction: column; }
+.kali-subbtns .kbtn { font-size: 13px; padding: 8px 10px; }
+
+/* Terminal */
+.kali-main { overflow: hidden; display: flex; }
+.term {
+  flex: 1; background: #05080b; border: 1px solid #1d2733; border-radius: 8px; padding: 12px;
+  font-family: 'Cascadia Code', 'Courier New', monospace; font-size: 13px; line-height: 1.6;
+  overflow-y: auto; color: #c7d3db;
+}
+.term-line { white-space: pre-wrap; word-break: break-word; }
+.term-line.cmd { color: #eaf2f7; margin-top: 4px; }
+.term-line.ok { color: #39d98a; }
+.term-line.warn { color: #ffb15e; }
+.term-line.dim { color: #7b8b99; }
+.term-prompt { color: #39d98a; }
+.term-cursor { animation: blink 1s steps(2) infinite; color: #39d98a; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* Janela de visualização */
+.kali-view { display: flex; flex-direction: column; background: #0d141b; border: 1px solid #1d2733; border-radius: 8px; overflow: hidden; }
+.kali-win-bar { display: flex; align-items: center; gap: 6px; padding: 8px 12px; background: #141c24; border-bottom: 1px solid #1d2733; }
+.kdot { width: 11px; height: 11px; border-radius: 50%; }
+.kdot.r { background: #ff5f56; } .kdot.y { background: #ffbd2e; } .kdot.g { background: #27c93f; }
+.kwin-title { margin-left: 8px; font-family: monospace; font-size: 12px; color: #8fa0b0; }
+.kali-win-body { flex: 1; overflow-y: auto; }
+.kali-appframe { background: #fff; min-height: 100%; }
+
+/* Painéis de ataque */
+.kpanel { padding: 16px; }
+.kpanel h3 { color: #9fd4ff; font-size: 14px; margin-bottom: 12px; font-family: monospace; }
+.ktable { width: 100%; border-collapse: collapse; }
+.ktable td { padding: 7px 8px; border-bottom: 1px solid #1a2630; font-size: 13px; }
+.ktable td:first-child { color: #8fa0b0; width: 110px; }
+.ktable td:last-child { color: #eaf2f7; font-weight: 600; }
+.kcaption { margin-top: 12px; font-size: 12px; color: #7fd4a0; line-height: 1.5; background: #0f2118; border-left: 3px solid #39d98a; padding: 8px 10px; border-radius: 0 6px 6px 0; }
+
+.kwords { display: flex; flex-wrap: wrap; gap: 6px; }
+.kword { background: #121b24; border: 1px solid #22323f; border-radius: 6px; padding: 4px 8px; font-family: monospace; font-size: 12px; color: #c7d3db; }
+.kword.hit { background: #10361f; border-color: #39d98a; color: #baffcf; font-weight: 700; }
+.klogin { margin-top: 14px; }
+.klogin-box { background: #05080b; border: 1px solid #22323f; border-radius: 8px; padding: 12px; font-size: 13px; }
+.kfield { margin: 6px 0; color: #c7d3db; }
+.kfield code, code.hit { font-family: monospace; }
+code.hit { color: #39d98a; font-weight: 700; }
+.kresult { color: #39d98a; font-family: monospace; font-size: 13px; margin-top: 8px; }
+
+.krecov { display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #121b24; border-radius: 8px; margin-bottom: 8px; font-size: 13px; gap: 10px; }
+.kchat { background: #0b141a; border-radius: 10px; padding: 12px; }
+.kchat-head { font-size: 12px; color: #8fa0b0; margin-bottom: 8px; font-family: monospace; }
+.kbubble { background: #005c4b; color: #e8ffe8; padding: 10px 12px; border-radius: 10px; margin: 6px 0; font-size: 13px; line-height: 1.45; max-width: 90%; }
+.kmap { background: #fff; border-radius: 8px; overflow: hidden; }
+.krisk { list-style: none; margin: 12px 0; }
+.krisk li { padding: 7px 0; border-bottom: 1px solid #1a2630; font-size: 13px; }
+
+@media (max-width: 900px) {
+  .kali-body { grid-template-columns: 1fr; grid-auto-rows: minmax(200px, auto); overflow-y: auto; }
+}

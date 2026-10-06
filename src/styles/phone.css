@@ -1,0 +1,36 @@
+.phone-wrap {
+  min-height: 100%; display: flex; align-items: center; justify-content: center;
+  padding: 16px; background: radial-gradient(120% 90% at 50% 0%, #1a2430 0%, #080b0f 70%);
+}
+.phone {
+  width: 100%; max-width: 420px; height: min(900px, 94vh);
+  background: #000; border-radius: 34px; overflow: hidden; position: relative;
+  border: 2px solid #1d2733; box-shadow: 0 24px 60px rgba(0,0,0,.6);
+  display: flex; flex-direction: column;
+}
+.phone-status {
+  display: flex; justify-content: space-between; padding: 10px 20px 6px;
+  font-size: 13px; color: #cdd6df; background: #000; flex: 0 0 auto;
+}
+
+/* HOME */
+.home { flex: 1; position: relative; display: flex; flex-direction: column; padding: 20px; overflow: hidden; }
+.home-wallpaper { position: absolute; inset: 0; background: linear-gradient(160deg,#ff9a56,#d6336c 55%,#5b2a86); z-index: 0; }
+.home-greet, .home-grid, .home-start, .home-disclaimer { position: relative; z-index: 1; }
+.home-greet { text-align: center; color: #fff; margin-top: 18px; text-shadow: 0 2px 8px rgba(0,0,0,.3); }
+.home-greet h1 { font-size: 56px; font-weight: 300; }
+.home-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: auto 0; }
+.home-icon { background: none; border: none; color: #fff; display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 12px; text-shadow: 0 1px 4px rgba(0,0,0,.4); }
+.hi-badge { width: 60px; height: 60px; border-radius: 16px; display: grid; place-items: center; font-size: 30px; box-shadow: 0 6px 14px rgba(0,0,0,.3); }
+.home-start {
+  margin-top: auto; padding: 16px; border: none; border-radius: 16px; font-size: 16px; font-weight: 700;
+  background: rgba(0,0,0,.55); color: #fff; backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,.2);
+}
+.home-disclaimer { text-align: center; color: rgba(255,255,255,.85); font-size: 11px; margin-top: 10px; }
+
+/* App screen */
+.app-screen { flex: 1; overflow-y: auto; position: relative; background: #fff; }
+.back-btn {
+  position: sticky; bottom: 14px; left: 14px; margin: 14px; padding: 10px 16px; border-radius: 20px;
+  background: #111; color: #fff; border: none; font-size: 14px; box-shadow: 0 4px 12px rgba(0,0,0,.3);
+}
