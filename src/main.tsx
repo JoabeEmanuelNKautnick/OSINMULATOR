@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { Investigador } from './investigador/Investigador'
 import { Kali } from './kali/Kali'
+import { Atc } from './atc/Atc'
 import './styles/base.css'
 
 function Landing() {
@@ -18,7 +19,12 @@ function Landing() {
         <a className="lc lc-kali" href="?kali">
           <span className="lc-ico">🐉</span>
           <b>Kali</b>
-          <small>Para o palestrante · no computador. Recon + ataques simulados.</small>
+          <small>Para o palestrante · no computador. Recon + ataques simulados (demo livre).</small>
+        </a>
+        <a className="lc lc-atc" href="?atc">
+          <span className="lc-ico">🎯</span>
+          <b>Atacante</b>
+          <small>No computador. 9 passos de ataque com placar e tempo, e o relatório da invasão.</small>
         </a>
       </div>
       <p className="landing-foot">Pessoa e dados 100% fictícios.</p>
@@ -29,6 +35,7 @@ function Landing() {
 function Router() {
   const q = window.location.search
   if (q.includes('investigador')) return <Investigador />
+  if (q.includes('atc')) return <Atc />
   if (q.includes('kali')) return <Kali />
   return <Landing />
 }

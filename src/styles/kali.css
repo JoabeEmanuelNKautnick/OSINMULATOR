@@ -74,6 +74,58 @@ code.hit { color: #39d98a; font-weight: 700; }
 .krisk { list-style: none; margin: 12px 0; }
 .krisk li { padding: 7px 0; border-bottom: 1px solid #1a2630; font-size: 13px; }
 
+/* ===== Modo ?atc (atacante jogável) ===== */
+.atc-steps { list-style: none; counter-reset: step; }
+.atc-step {
+  display: flex; align-items: flex-start; gap: 8px; padding: 9px 10px; margin-bottom: 6px;
+  border-radius: 8px; font-size: 13px; border: 1px solid #22323f; background: #121b24; color: #8fa0b0;
+}
+.atc-step-ic { flex: 0 0 auto; }
+.atc-step.current { border-color: #ff7a5a; background: #241510; color: #ffd0c0; font-weight: 600; }
+.atc-step.done { border-color: #2f7d53; color: #baffcf; }
+.atc-step.done .atc-step-ic { color: #39d98a; }
+.atc-step.locked { opacity: .6; }
+
+/* Painel de missão de ataque */
+.amp { padding: 16px; border-bottom: 1px solid #1d2733; }
+.amp-head { display: flex; justify-content: space-between; align-items: center; font-family: monospace; font-size: 12px; margin-bottom: 10px; }
+.amp-count { color: #ff7a5a; }
+.amp-obj { color: #9fd4ff; }
+.amp-q { font-size: 16px; color: #eaf2f7; margin-bottom: 12px; line-height: 1.35; }
+.amp-opts { display: grid; gap: 8px; }
+.amp-opt {
+  display: flex; align-items: center; gap: 8px; text-align: left; padding: 11px 12px; border-radius: 8px;
+  border: 1px solid #22323f; background: #0f1821; color: #dbe6ee; font-size: 14px; transition: background .12s, border-color .12s;
+}
+.amp-opt:hover:not(:disabled) { background: #16242f; border-color: #ff7a5a; }
+.amp-opt kbd { background: #0a0e12; border: 1px solid #2a3a47; border-radius: 4px; padding: 0 6px; font-size: 11px; color: #8fa0b0; }
+.amp-opt.ok { background: #10361f; border-color: #39d98a; color: #baffcf; }
+.amp-opt.bad { background: #3a1414; border-color: #ff5a5a; color: #ffc4c4; }
+.amp-opt:disabled { cursor: default; }
+.amp-feedback { margin-top: 12px; padding: 10px 12px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 14px; }
+.amp-feedback.ok { background: #10291b; border: 1px solid #2f7d53; }
+.amp-feedback.bad { background: #2a1620; border: 1px solid #a3425f; }
+.amp-next { padding: 8px 14px; border: none; border-radius: 7px; background: #ff7a5a; color: #2a0f08; font-weight: 700; font-size: 13px; }
+
+/* Relatório de loot */
+.loot { padding: 18px; }
+.loot-stamp { display: inline-block; color: #ff5a5a; border: 2px solid #ff5a5a; padding: 4px 10px; font-family: monospace; font-weight: 700; letter-spacing: 2px; transform: rotate(-3deg); border-radius: 4px; }
+.loot h2 { margin: 14px 0; font-size: 19px; color: #eaf2f7; }
+.loot-score { display: flex; justify-content: space-around; background: #121b24; border-radius: 12px; padding: 14px 0; margin-bottom: 18px; }
+.loot-score div { display: flex; flex-direction: column; align-items: center; }
+.loot-score b { font-size: 22px; color: #ff7a5a; }
+.loot-score span { font-size: 11px; color: #8fa0b0; }
+.loot h3 { font-size: 14px; margin: 18px 0 10px; color: #9fd4ff; font-family: monospace; }
+.loot-item { display: flex; justify-content: space-between; gap: 10px; padding: 7px 0; border-bottom: 1px solid #1a2630; font-size: 13px; }
+.loot-label { color: #8fa0b0; }
+.loot-value { color: #eaf2f7; font-weight: 600; text-align: right; }
+.loot-note { font-size: 12px; color: #c99; font-style: italic; margin-top: 8px; }
+.loot-def { background: #0f2118; border-left: 3px solid #39d98a; padding: 9px 11px; border-radius: 0 7px 7px 0; margin: 7px 0; }
+.loot-def b { color: #9effc3; font-size: 13px; }
+.loot-def p { color: #c7d3db; font-size: 13px; margin-top: 3px; line-height: 1.45; }
+.loot-warn { background: #241318; border: 1px solid #5a2a33; border-radius: 10px; padding: 10px 12px; font-size: 12px; color: #f0d6da; margin-top: 14px; line-height: 1.45; }
+.loot-restart { width: 100%; margin-top: 16px; padding: 13px; border: none; border-radius: 10px; background: #3a7bd5; color: #fff; font-weight: 700; font-size: 15px; }
+
 @media (max-width: 900px) {
   .kali-body { grid-template-columns: 1fr; grid-auto-rows: minmax(200px, auto); overflow-y: auto; }
 }

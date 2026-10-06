@@ -25,6 +25,7 @@ a { text-decoration: none; color: inherit; }
 .lc small { color: #8fa0b0; line-height: 1.4; }
 .lc-phone:hover { border-color: #d6336c; }
 .lc-kali:hover { border-color: #39d98a; }
+.lc-atc:hover { border-color: #ff7a5a; }
 .landing-foot { color: #5f6f7f; font-size: 13px; }
 
 /* ===== Apps compartilhados ===== */
