@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { attackMissions, type RevealKind } from '../data/attackMissions'
 import { Terminal, type Line } from '../kali/Terminal'
-import { AppView } from '../apps/AppView'
+import { AppView, appMeta } from '../apps/AppView'
+import type { AppId } from '../data/missions'
 import { WordlistPanel, RecoveryPanel, PhishingPanel, RiskMapPanel } from '../kali/attacks/panels'
 import { AttackMissionPanel } from './AttackMissionPanel'
 import { LootReport } from './LootReport'
@@ -38,6 +39,7 @@ export function Atc() {
   const [lines, setLines] = useState<Line[]>(intro)
   const [reveal, setReveal] = useState<RevealKind | null>(null)
   const [done, setDone] = useState(false)
+  const [evidenceApp, setEvidenceApp] = useState<AppId | null>(null)
   const timer = useRef<number | null>(null)
 
   useEffect(() => {
@@ -65,8 +67,10 @@ export function Atc() {
   }
 
   function restart() {
-    setMi(0); setScore(0); setCorrect(0); setSeconds(0); setLines(intro); setReveal(null); setDone(false)
+    setMi(0); setScore(0); setCorrect(0); setSeconds(0); setLines(intro); setReveal(null); setDone(false); setEvidenceApp(null)
   }
+
+  const apps: AppId[] = ['fotogram', 'correapp', 'gamechat']
 
   const m = attackMissions[mi]
 
@@ -98,6 +102,23 @@ export function Atc() {
               })}
             </ol>
           </div>
+
+          <div className="kali-group">
+            <h4>Evidências (apps)</h4>
+            <div className="atc-apps">
+              {apps.map((a) => (
+                <button
+                  key={a}
+                  className={'atc-app' + (evidenceApp === a ? ' active' : '')}
+                  onClick={() => setEvidenceApp((cur) => (cur === a ? null : a))}
+                >
+                  <span className="atc-app-ic" style={{ background: appMeta[a].color }}>{appMeta[a].icon}</span>
+                  {appMeta[a].name}
+                </button>
+              ))}
+            </div>
+            <p className="atc-apps-hint">Abra as redes públicas da alvo a qualquer momento para conferir as pistas.</p>
+          </div>
         </aside>
 
         <main className="kali-main">
@@ -107,10 +128,13 @@ export function Atc() {
         <section className="kali-view">
           <div className="kali-win-bar">
             <span className="kdot r" /><span className="kdot y" /><span className="kdot g" />
-            <span className="kwin-title">{done ? 'loot-report' : reveal ? revealTitle(reveal) : 'briefing'}</span>
+            <span className="kwin-title">{evidenceApp ? `evidence://${evidenceApp}` : done ? 'loot-report' : reveal ? revealTitle(reveal) : 'briefing'}</span>
+            {evidenceApp && <button className="atc-app-close" onClick={() => setEvidenceApp(null)}>✕ fechar</button>}
           </div>
           <div className="kali-win-body">
-            {done ? (
+            {evidenceApp ? (
+              <div className="kali-appframe"><AppView app={evidenceApp} /></div>
+            ) : done ? (
               <LootReport score={score} seconds={seconds} correctCount={correct} onRestart={restart} />
             ) : (
               <>
