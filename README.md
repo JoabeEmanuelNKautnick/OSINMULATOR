@@ -16,12 +16,17 @@ O público vira "investigador" e descobre, só com publicações públicas, tudo
 sobre a Lia. No fim, vê o estrago que essas pistas somadas podem causar — e,
 mais importante, **como cada pista poderia ter sido evitada**.
 
-São **duas visões independentes** que compartilham exatamente os mesmos dados:
+São **três visões independentes** que compartilham exatamente os mesmos dados:
 
 | Visão | Para quem | Onde | O que faz |
 |-------|-----------|------|-----------|
 | **`?investigador`** | o público | celular | 3 apps fictícios, 9 missões de múltipla escolha, modo forense com pontuação e tempo, e dossiê final |
-| **`?kali`** | o palestrante | computador | visual de terminal, reconstrói o dossiê e demonstra 4 "ataques" simulados |
+| **`?kali`** | o palestrante | computador | visual de terminal, reconstrói o dossiê e demonstra 4 "ataques" simulados (demo livre, sem placar) |
+| **`?atc`** | atacante jogável | computador | mesmo visual do Kali, mas com **9 passos de ataque** em múltipla escolha, **placar e tempo**, e o relatório da invasão |
+
+> 🎲 **Dinâmica sugerida:** o público joga de `?investigador` e um voluntário (ou o
+> palestrante) joga de `?atc` ao mesmo tempo — um descobre as pistas, o outro mostra o
+> que um atacante faria com elas. Os dados são os mesmos nos dois lados.
 
 ### As 3 redes fictícias
 - **Fotogram** (tipo Instagram) — posts e comentários
@@ -50,7 +55,8 @@ Depois abra:
 
 - Tela inicial (escolha das visões): **http://localhost:5173/**
 - Visão do público: **http://localhost:5173/?investigador**
-- Visão do palestrante: **http://localhost:5173/?kali**
+- Visão do palestrante (demo): **http://localhost:5173/?kali**
+- Atacante jogável: **http://localhost:5173/?atc**
 
 Para testar no celular pelo mesmo Wi-Fi, use o endereço `Network` que o Vite
 mostra no terminal (ex.: `http://192.168.x.x:5173/?investigador`).
@@ -77,21 +83,33 @@ Netlify, Vercel, etc.
 | `3` | Ataque: engenharia social |
 | `4` | Ataque: mapa de risco |
 
+## 🎯 O modo `?atc` (atacante)
+
+São **9 passos de ataque** em múltipla escolha, cada um partindo de um dado que a Lia
+deixou público: escolher o vetor mais fraco → montar a wordlist → quebrar o login →
+burlar a recuperação de conta (pet e mãe) → preparar a engenharia social → localizar o
+alvo → achar a janela sem a família → mapear a rotina.
+
+A cada acerto, o terminal "executa" o passo e a janela revela o painel correspondente.
+No fim, o **relatório da invasão** lista tudo que foi capturado e **vira a chave**,
+mostrando como a Lia barraria cada passo. Tudo é simulação — nenhum ataque real acontece.
+
 ---
 
 ## 🧱 Tecnologias
 
-Vite · React · TypeScript · CSS puro. Sem back-end — as duas visões são
+Vite · React · TypeScript · CSS puro. Sem back-end — as três visões são
 totalmente estáticas e rodam no navegador.
 
 ## 📁 Estrutura
 
 ```
 src/
-  data/           persona.ts e missions.ts (FONTE ÚNICA dos dados)
+  data/           persona.ts, missions.ts e attackMissions.ts (FONTE ÚNICA dos dados)
   apps/           Fotogram, CorreApp, GameChat (compartilhados)
   investigador/   fluxo do celular + modo forense + dossiê
-  kali/           terminal + ataques simulados
+  kali/           terminal + ataques simulados (demo)
+  atc/            modo atacante jogável (missões + placar + relatório)
   styles/         base, phone, forensic, kali
 imgs/             fotos fictícias da Lia
 ```
