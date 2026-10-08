@@ -6,6 +6,7 @@ import type { AppId } from '../data/missions'
 import { WordlistPanel, RecoveryPanel, PhishingPanel, RiskMapPanel } from '../kali/attacks/panels'
 import { AttackMissionPanel } from './AttackMissionPanel'
 import { LootReport } from './LootReport'
+import { IconTarget, IconAlert, IconCheck, IconPlay, IconLock, IconTrophy, IconClock } from '../ui/icons'
 import '../styles/kali.css'
 
 const CORRECT = 100
@@ -76,11 +77,11 @@ export function Atc() {
 
   return (
     <div className="kali">
-      <div className="kali-banner">⚠ SIMULAÇÃO EDUCATIVA — pessoa e dados 100% fictícios. Nenhum ataque real é executado.</div>
+      <div className="kali-banner ico-row"><IconAlert size={14} /> SIMULAÇÃO EDUCATIVA — pessoa e dados 100% fictícios. Nenhum ataque real é executado.</div>
       <div className="kali-topbar">
-        <span className="kali-dragon">🐉 Kali</span>
+        <span className="kali-dragon ico-row"><IconTarget size={16} /> Atacante</span>
         <span className="kali-title">attack-lab — root@kali · modo missões</span>
-        <span className="kali-clock">🎯 {score} pts · ⏱ {Math.floor(seconds / 60)}:{(seconds % 60).toString().padStart(2, '0')}</span>
+        <span className="kali-clock ico-row"><IconTrophy size={14} /> {score} pts · <IconClock size={14} /> {Math.floor(seconds / 60)}:{(seconds % 60).toString().padStart(2, '0')}</span>
       </div>
 
       <div className="kali-body">
@@ -93,9 +94,12 @@ export function Atc() {
                 if (done || i < mi) st += ' done'
                 else if (i === mi) st += ' current'
                 else st += ' locked'
+                const done2 = done || i < mi
                 return (
                   <li key={am.id} className={st}>
-                    <span className="atc-step-ic">{(done || i < mi) ? '✓' : i === mi ? '▶' : '🔒'}</span>
+                    <span className="atc-step-ic">
+                      {done2 ? <IconCheck size={14} /> : i === mi ? <IconPlay size={13} /> : <IconLock size={13} />}
+                    </span>
                     {am.objective}
                   </li>
                 )
@@ -106,16 +110,19 @@ export function Atc() {
           <div className="kali-group">
             <h4>Evidências (apps)</h4>
             <div className="atc-apps">
-              {apps.map((a) => (
-                <button
-                  key={a}
-                  className={'atc-app' + (evidenceApp === a ? ' active' : '')}
-                  onClick={() => setEvidenceApp((cur) => (cur === a ? null : a))}
-                >
-                  <span className="atc-app-ic" style={{ background: appMeta[a].color }}>{appMeta[a].icon}</span>
-                  {appMeta[a].name}
-                </button>
-              ))}
+              {apps.map((a) => {
+                const { Icon, name, color } = appMeta[a]
+                return (
+                  <button
+                    key={a}
+                    className={'atc-app' + (evidenceApp === a ? ' active' : '')}
+                    onClick={() => setEvidenceApp((cur) => (cur === a ? null : a))}
+                  >
+                    <span className="atc-app-ic" style={{ background: color }}><Icon size={15} /></span>
+                    {name}
+                  </button>
+                )
+              })}
             </div>
             <p className="atc-apps-hint">Abra as redes públicas da alvo a qualquer momento para conferir as pistas.</p>
           </div>

@@ -1,7 +1,10 @@
+@import './tokens.css';
+@import './ui.css';
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 :root { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
 html, body, #root { height: 100%; }
-body { background: #0b0f14; color: #e8edf2; -webkit-font-smoothing: antialiased; }
+body { background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
 button { font-family: inherit; cursor: pointer; }
 a { text-decoration: none; color: inherit; }
 
@@ -9,24 +12,30 @@ a { text-decoration: none; color: inherit; }
 .landing {
   min-height: 100%; display: flex; flex-direction: column; align-items: center;
   justify-content: center; text-align: center; padding: 24px 16px; gap: 10px;
-  background: radial-gradient(120% 80% at 50% 0%, #15202b 0%, #0b0f14 70%);
+  background: radial-gradient(120% 80% at 50% -10%, color-mix(in srgb, var(--purple) 16%, var(--bg)) 0%, var(--bg) 65%);
 }
+.landing-brand { display: inline-flex; align-items: center; gap: 12px; }
+.landing-logo { color: var(--purple); display: grid; place-items: center; }
 .landing h1 { font-size: 34px; letter-spacing: -0.5px; }
-.landing > p { color: #9fb0c0; max-width: 460px; }
+.landing-tag { color: var(--purple-2); font-family: var(--mono); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; }
+.landing > p { color: var(--text-2); max-width: 480px; }
 .landing-cards { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin: 22px 0; }
 .lc {
-  width: 240px; padding: 24px; border-radius: 18px; display: flex; flex-direction: column;
-  gap: 8px; align-items: center; border: 1px solid #243040; background: #121a23;
-  transition: transform .15s, border-color .15s;
+  width: 250px; padding: 24px; border-radius: var(--r-lg); display: flex; flex-direction: column;
+  gap: 10px; align-items: center; border: 1px solid var(--border); background: var(--card);
+  transition: transform .15s, border-color .15s, box-shadow .15s;
 }
-.lc:hover { transform: translateY(-4px); border-color: #3a7bd5; }
-.lc-ico { font-size: 44px; }
-.lc b { font-size: 20px; }
-.lc small { color: #8fa0b0; line-height: 1.4; }
-.lc-phone:hover { border-color: #d6336c; }
-.lc-kali:hover { border-color: #39d98a; }
-.lc-atc:hover { border-color: #ff7a5a; }
-.landing-foot { color: #5f6f7f; font-size: 13px; }
+.lc:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: var(--shadow-2); }
+.lc-ico {
+  width: 56px; height: 56px; border-radius: 14px; display: grid; place-items: center;
+  background: var(--card-2); border: 1px solid var(--border); color: var(--accent); margin-bottom: 2px;
+}
+.lc b { font-size: 19px; color: var(--text); }
+.lc small { color: var(--text-2); line-height: 1.45; font-size: 13px; }
+.lc-phone { --accent: var(--purple); }
+.lc-kali { --accent: var(--blue); }
+.lc-atc { --accent: var(--danger); }
+.landing-foot { color: var(--text-3); font-size: 13px; display: inline-flex; align-items: center; gap: 6px; }
 
 /* ===== Apps compartilhados ===== */
 .photo { width: 100%; aspect-ratio: 1 / 1; background: #0e141b; overflow: hidden; }

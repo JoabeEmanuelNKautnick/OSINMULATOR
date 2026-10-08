@@ -2,3 +2,5 @@ node_modules
 dist
 
 *.tsbuildinfo
+
+OSINT_Simulator_Proposta_Visual.md

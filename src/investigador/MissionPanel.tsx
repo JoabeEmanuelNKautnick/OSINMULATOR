@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { Mission } from '../data/missions'
 import { appMeta } from '../apps/AppView'
+import { IconSearch, IconCheck, IconAlert } from '../ui/icons'
 
 export function MissionPanel({
   mission,
@@ -26,12 +27,12 @@ export function MissionPanel({
     <div className="mp">
       <div className="mp-head">
         <span className="mp-count">MISSÃO {index + 1}/{total}</span>
-        <span className="mp-app" style={{ color: appMeta[mission.app].color }}>
-          {appMeta[mission.app].icon} {appMeta[mission.app].name}
+        <span className="mp-app ico-row" style={{ color: appMeta[mission.app].color }}>
+          {(() => { const I = appMeta[mission.app].Icon; return <I size={15} /> })()} {appMeta[mission.app].name}
         </span>
       </div>
       <h3 className="mp-q">{mission.question}</h3>
-      <div className="mp-hint">🔎 Pista está no app {appMeta[mission.app].name}. Role e investigue.</div>
+      <div className="mp-hint ico-row"><IconSearch size={14} /> Pista está no app {appMeta[mission.app].name}. Role e investigue.</div>
 
       <div className="mp-opts">
         {mission.options.map((o, i) => {
@@ -48,7 +49,9 @@ export function MissionPanel({
 
       {revealed && (
         <div className={'mp-feedback ' + (correct ? 'ok' : 'bad')}>
-          <b>{correct ? '✓ Correto' : '✗ Resposta: ' + mission.options[mission.answer]}</b>
+          <b className="ico-row">
+            {correct ? <><IconCheck size={16} /> Correto</> : <><IconAlert size={16} /> Resposta: {mission.options[mission.answer]}</>}
+          </b>
           <p>{mission.explanation}</p>
           <button className="mp-next" onClick={() => onAnswer(correct)}>
             {index + 1 === total ? 'Ver dossiê →' : 'Próxima pista →'}

@@ -4,6 +4,8 @@ import { persona } from '../data/persona'
 import { AppView, appMeta } from '../apps/AppView'
 import { MissionPanel } from './MissionPanel'
 import { Dossier } from './Dossier'
+import { IconSearch, IconLock, IconTrophy, IconClock, IconWifi, IconBattery } from '../ui/icons'
+import { ProgressBar } from '../ui/Progress'
 import '../styles/phone.css'
 import '../styles/forensic.css'
 
@@ -55,7 +57,11 @@ export function Investigador() {
       <div className="phone">
         <div className="phone-status">
           <span>{clock}</span>
-          <span>{phase === 'playing' ? '🔒 MODO FORENSE' : '📶 🔋 100%'}</span>
+          <span className="ico-row">
+            {phase === 'playing'
+              ? <><IconLock size={13} /> MODO FORENSE</>
+              : <><IconWifi size={14} /> <IconBattery size={14} /> 100%</>}
+          </span>
         </div>
 
         {/* HOME */}
@@ -67,15 +73,18 @@ export function Investigador() {
               <p>Segunda-feira, celular de {persona.name}</p>
             </div>
             <div className="home-grid">
-              {(['fotogram', 'correapp', 'gamechat'] as const).map((a) => (
-                <button key={a} className="home-icon" onClick={() => { setOpenApp(a); setPhase('app') }}>
-                  <span className="hi-badge" style={{ background: appMeta[a].color }}>{appMeta[a].icon}</span>
-                  <span>{appMeta[a].name}</span>
-                </button>
-              ))}
+              {(['fotogram', 'correapp', 'gamechat'] as const).map((a) => {
+                const { Icon, name, color } = appMeta[a]
+                return (
+                  <button key={a} className="home-icon" onClick={() => { setOpenApp(a); setPhase('app') }}>
+                    <span className="hi-badge" style={{ background: color }}><Icon size={28} /></span>
+                    <span>{name}</span>
+                  </button>
+                )
+              })}
             </div>
             <button className="home-start" onClick={startInvestigation}>
-              🔎 Iniciar investigação
+              <IconSearch size={18} /> Iniciar investigação
             </button>
             <p className="home-disclaimer">Simulação educativa · pessoa e dados fictícios</p>
           </div>
@@ -106,8 +115,11 @@ export function Investigador() {
         {phase === 'playing' && (
           <div className="forensic">
             <div className="hud">
-              <span>🎯 {score} pts</span>
-              <span>⏱ {Math.floor(seconds / 60)}:{(seconds % 60).toString().padStart(2, '0')}</span>
+              <span className="hud-stat ico-row"><IconTrophy size={15} /> {score} pts</span>
+              <div className="hud-prog">
+                <ProgressBar label="Evidências" value={mi} max={missions.length} tone="purple" />
+              </div>
+              <span className="hud-stat ico-row"><IconClock size={15} /> {Math.floor(seconds / 60)}:{(seconds % 60).toString().padStart(2, '0')}</span>
             </div>
             <div className="forensic-app">
               <AppView app={missions[mi].app} highlight={missions[mi].evidence} />

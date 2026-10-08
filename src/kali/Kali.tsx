@@ -6,6 +6,7 @@ import { AppView, appMeta } from '../apps/AppView'
 import {
   DossierPanel, WordlistPanel, RecoveryPanel, PhishingPanel, RiskMapPanel,
 } from './attacks/panels'
+import { IconTerminal, IconAlert, IconPlay, IconKey, IconUnlock, IconMask, IconMap, type Icon } from '../ui/icons'
 import '../styles/kali.css'
 
 type View =
@@ -26,9 +27,10 @@ function reconLines(): Line[] {
   return out
 }
 
-const attacks: Record<string, { label: string; cmd: string; lines: Line[]; view: View }> = {
+const attacks: Record<string, { label: string; Icon: Icon; cmd: string; lines: Line[]; view: View }> = {
   wordlist: {
-    label: '🔑 Quebra de senha',
+    label: 'Quebra de senha',
+    Icon: IconKey,
     cmd: 'wordlist',
     view: { kind: 'wordlist' },
     lines: [
@@ -40,7 +42,8 @@ const attacks: Record<string, { label: string; cmd: string; lines: Line[]; view:
     ],
   },
   recovery: {
-    label: '🔓 Recuperar conta',
+    label: 'Recuperar conta',
+    Icon: IconUnlock,
     cmd: 'account-recovery',
     view: { kind: 'recovery' },
     lines: [
@@ -52,7 +55,8 @@ const attacks: Record<string, { label: string; cmd: string; lines: Line[]; view:
     ],
   },
   phishing: {
-    label: '🎣 Engenharia social',
+    label: 'Engenharia social',
+    Icon: IconMask,
     cmd: 'pretext-gen',
     view: { kind: 'phishing' },
     lines: [
@@ -62,7 +66,8 @@ const attacks: Record<string, { label: string; cmd: string; lines: Line[]; view:
     ],
   },
   riskmap: {
-    label: '🗺️ Mapa de risco',
+    label: 'Mapa de risco',
+    Icon: IconMap,
     cmd: 'geo-correlate',
     view: { kind: 'riskmap' },
     lines: [
@@ -103,9 +108,9 @@ export function Kali() {
 
   return (
     <div className="kali">
-      <div className="kali-banner">⚠ SIMULAÇÃO EDUCATIVA — pessoa e dados 100% fictícios. Nenhuma ferramenta real é executada.</div>
+      <div className="kali-banner ico-row"><IconAlert size={14} /> SIMULAÇÃO EDUCATIVA — pessoa e dados 100% fictícios. Nenhuma ferramenta real é executada.</div>
       <div className="kali-topbar">
-        <span className="kali-dragon">🐉 Kali</span>
+        <span className="kali-dragon ico-row"><IconTerminal size={16} /> Analista</span>
         <span className="kali-title">osint-toolkit — root@kali</span>
         <span className="kali-clock">{new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</span>
       </div>
@@ -114,22 +119,28 @@ export function Kali() {
         <aside className="kali-side">
           <div className="kali-group">
             <h4>Reconhecimento</h4>
-            <button className="kbtn prime" onClick={runRecon}>▶ Recon completo <kbd>Enter</kbd></button>
+            <button className="kbtn prime" onClick={runRecon}><IconPlay size={15} /> Recon completo <kbd>Enter</kbd></button>
             <div className="kali-subbtns">
-              {(['fotogram', 'correapp', 'gamechat'] as const).map((a) => (
-                <button key={a} className="kbtn" onClick={() => openApp(a)}>
-                  {appMeta[a].icon} {appMeta[a].name}
-                </button>
-              ))}
+              {(['fotogram', 'correapp', 'gamechat'] as const).map((a) => {
+                const { Icon, name } = appMeta[a]
+                return (
+                  <button key={a} className="kbtn" onClick={() => openApp(a)}>
+                    <Icon size={16} /> {name}
+                  </button>
+                )
+              })}
             </div>
           </div>
           <div className="kali-group">
             <h4>Ataques simulados</h4>
-            {(Object.keys(attacks) as (keyof typeof attacks)[]).map((k, i) => (
-              <button key={k} className="kbtn attack" onClick={() => runAttack(k)}>
-                {attacks[k].label} <kbd>{i + 1}</kbd>
-              </button>
-            ))}
+            {(Object.keys(attacks) as (keyof typeof attacks)[]).map((k, i) => {
+              const { Icon, label } = attacks[k]
+              return (
+                <button key={k} className="kbtn attack" onClick={() => runAttack(k)}>
+                  <Icon size={16} /> {label} <kbd>{i + 1}</kbd>
+                </button>
+              )
+            })}
           </div>
         </aside>
 

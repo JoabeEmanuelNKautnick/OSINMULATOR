@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { AttackMission } from '../data/attackMissions'
+import { IconTarget, IconCheck, IconAlert } from '../ui/icons'
 
 export function AttackMissionPanel({
   mission,
@@ -20,7 +21,7 @@ export function AttackMissionPanel({
     <div className="amp">
       <div className="amp-head">
         <span className="amp-count">PASSO {index + 1}/{total}</span>
-        <span className="amp-obj">🎯 {mission.objective}</span>
+        <span className="amp-obj ico-row"><IconTarget size={14} /> {mission.objective}</span>
       </div>
       <h3 className="amp-q">{mission.question}</h3>
 
@@ -39,7 +40,7 @@ export function AttackMissionPanel({
 
       {revealed && (
         <div className={'amp-feedback ' + (correct ? 'ok' : 'bad')}>
-          <b>{correct ? '✓ Passo executado' : '✗ Correto: ' + mission.options[mission.answer]}</b>
+          <b className="ico-row">{correct ? <><IconCheck size={15} /> Passo executado</> : <><IconAlert size={15} /> Correto: {mission.options[mission.answer]}</>}</b>
           <button className="amp-next" onClick={() => onAnswer(correct)}>
             {index + 1 === total ? 'Ver relatório →' : 'Próximo passo →'}
           </button>

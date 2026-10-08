@@ -1,10 +1,20 @@
 import { missions } from '../data/missions'
 import { persona } from '../data/persona'
+import { appMeta } from '../apps/AppView'
+import { EvidenceCard } from '../ui/EvidenceCard'
+import { ProgressBar, StatRow } from '../ui/Progress'
+import { missionCategory } from '../ui/categories'
+import { IconAlert, IconShield, IconFolder } from '../ui/icons'
 
 function fmt(s: number) {
   const m = Math.floor(s / 60)
   const sec = s % 60
   return `${m}:${sec.toString().padStart(2, '0')}`
+}
+
+// Força da evidência por missão (direto vs. inferido).
+const confidence: Record<number, number> = {
+  1: 95, 2: 88, 3: 90, 4: 96, 5: 82, 6: 93, 7: 85, 8: 92, 9: 78,
 }
 
 export function Dossier({
@@ -18,29 +28,47 @@ export function Dossier({
   correctCount: number
   onRestart: () => void
 }) {
+  const avgConf = Math.round(
+    missions.reduce((a, m) => a + (confidence[m.id] ?? 80), 0) / missions.length,
+  )
+
   return (
     <div className="dossier">
-      <div className="ds-stamp">DOSSIÊ COMPLETO</div>
+      <div className="ds-stamp ico-row"><IconFolder size={15} /> DOSSIÊ COMPLETO</div>
       <h2>{persona.name}, {persona.age} · {persona.city}</h2>
 
       <div className="ds-score">
-        <div><b>{score}</b><span>pontos</span></div>
-        <div><b>{correctCount}/{missions.length}</b><span>acertos</span></div>
-        <div><b>{fmt(seconds)}</b><span>tempo</span></div>
+        <StatRow stats={[
+          { label: 'pontos', value: String(score), tone: 'purple' },
+          { label: 'acertos', value: `${correctCount}/${missions.length}`, tone: 'ok' },
+          { label: 'tempo', value: fmt(seconds) },
+        ]} />
+      </div>
+
+      <div className="ds-progress">
+        <ProgressBar label="Evidências" value={missions.length} max={missions.length} tone="purple" />
+        <ProgressBar label="Missões" value={correctCount} max={missions.length} tone="blue" showPct={false} />
+        <ProgressBar label="Confiança" value={avgConf} tone="auto" />
       </div>
 
       <section className="ds-clues">
         <h3>O que foi reunido só com posts públicos</h3>
-        {missions.map((m) => (
-          <div key={m.id} className="ds-clue">
-            <span className="ds-label">{m.clueLabel}</span>
-            <span className="ds-value">{m.clueValue}</span>
-          </div>
-        ))}
+        <div className="ds-ev-grid">
+          {missions.map((m) => (
+            <EvidenceCard
+              key={m.id}
+              category={missionCategory[m.id]}
+              value={m.clueValue}
+              source={appMeta[m.app].name}
+              confidence={confidence[m.id]}
+              xp={Math.round((confidence[m.id] ?? 80) / 4)}
+            />
+          ))}
+        </div>
       </section>
 
       <section className="ds-risk">
-        <h3>⚠️ O que alguém mal-intencionado faria com isso</h3>
+        <h3 className="ico-row"><IconAlert size={16} /> O que alguém mal-intencionado faria com isso</h3>
         <ul>
           <li><b>Invasão de conta:</b> a senha "{persona.gamechat.nick}" é adivinhável e serve para testar login e perguntas de segurança (pet, mãe, nascimento).</li>
           <li><b>Golpe do parente:</b> sabendo o nome da mãe e detalhes da família, dá para enviar mensagens falsas se passando pela Lia.</li>
@@ -52,7 +80,7 @@ export function Dossier({
       </section>
 
       <section className="ds-avoid">
-        <h3>✅ Como a Lia poderia ter evitado cada pista</h3>
+        <h3 className="ico-row"><IconShield size={16} /> Como a Lia poderia ter evitado cada pista</h3>
         {missions.map((m) => (
           <div key={m.id} className="ds-avoid-item">
             <b>{m.clueLabel}</b>
