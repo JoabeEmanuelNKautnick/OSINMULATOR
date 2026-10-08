@@ -6,6 +6,7 @@ import { MissionPanel } from './MissionPanel'
 import { Dossier } from './Dossier'
 import { IconSearch, IconLock, IconTrophy, IconClock, IconWifi, IconBattery } from '../ui/icons'
 import { ProgressBar } from '../ui/Progress'
+import { BackButton } from '../ui/BackButton'
 import '../styles/phone.css'
 import '../styles/forensic.css'
 
@@ -54,6 +55,7 @@ export function Investigador() {
 
   return (
     <div className="phone-wrap">
+      <BackButton className="back-float" />
       <div className="phone">
         <div className="phone-status">
           <span>{clock}</span>

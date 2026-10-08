@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="imgs/osinmulator_logo.png" alt="OSINMULATOR — Simulador de OSINT" width="660" />
+<img src="imgs/logos/osinmulator_logo.png" alt="OSINMULATOR — Simulador de OSINT" width="660" />
 
 ### Observe · Correlacione · Investigue
 

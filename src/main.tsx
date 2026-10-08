@@ -4,7 +4,7 @@ import { Investigador } from './investigador/Investigador'
 import { Kali } from './kali/Kali'
 import { Atc } from './atc/Atc'
 import { IconSearch, IconTerminal, IconTarget, IconShield, IconGithub } from './ui/icons'
-import logoUrl from '../imgs/osinmulator_logo.png'
+import logoUrl from '../imgs/logos/osinmulator_logo.png'
 import './styles/base.css'
 
 const GITHUB_URL = 'https://github.com/JoabeEmanuelNKautnick/OSINMULATOR'

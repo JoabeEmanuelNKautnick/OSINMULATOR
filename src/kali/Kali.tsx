@@ -8,6 +8,7 @@ import {
 } from './attacks/panels'
 import { IconAlert, IconPlay, IconKey, IconUnlock, IconMask, IconMap, IconProjector, IconGraph, IconClock, type Icon } from '../ui/icons'
 import { BrandMark } from '../ui/Brand'
+import { BackButton } from '../ui/BackButton'
 import { Palestra } from '../palestra/Palestra'
 import { InvestigationGraph } from '../ui/InvestigationGraph'
 import { InvestigationTimeline } from '../ui/InvestigationTimeline'
@@ -134,6 +135,7 @@ export function Kali() {
     <div className="kali">
       <div className="kali-banner ico-row"><IconAlert size={14} /> SIMULAÇÃO EDUCATIVA — pessoa e dados 100% fictícios. Nenhuma ferramenta real é executada.</div>
       <div className="kali-topbar">
+        <BackButton />
         <BrandMark size="sm" mode="Analista" />
         <span className="kali-title">osint-toolkit — root@kali</span>
         <button className="kproject" onClick={() => setPresenting(true)}>

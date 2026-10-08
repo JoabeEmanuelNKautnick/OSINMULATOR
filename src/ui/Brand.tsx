@@ -3,7 +3,7 @@
    Emblema: lupa + globo + anel de HUD (azul/ciano, como a logo).
    Letreiro: imagem do wordmark em fundo transparente (imgs/).
    ============================================================ */
-import letreiroUrl from '../../imgs/osinmulator_letreiro_trim.png'
+import letreiroUrl from '../../imgs/logos/osinmulator_letreiro_trim.png'
 
 export function BrandEmblem({ size = 28 }: { size?: number }) {
   return (
