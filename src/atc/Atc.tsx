@@ -6,7 +6,8 @@ import type { AppId } from '../data/missions'
 import { WordlistPanel, RecoveryPanel, PhishingPanel, RiskMapPanel } from '../kali/attacks/panels'
 import { AttackMissionPanel } from './AttackMissionPanel'
 import { LootReport } from './LootReport'
-import { IconTarget, IconAlert, IconCheck, IconPlay, IconLock, IconTrophy, IconClock } from '../ui/icons'
+import { IconAlert, IconCheck, IconPlay, IconLock, IconTrophy, IconClock } from '../ui/icons'
+import { BrandMark } from '../ui/Brand'
 import '../styles/kali.css'
 
 const CORRECT = 100
@@ -79,7 +80,7 @@ export function Atc() {
     <div className="kali">
       <div className="kali-banner ico-row"><IconAlert size={14} /> SIMULAÇÃO EDUCATIVA — pessoa e dados 100% fictícios. Nenhum ataque real é executado.</div>
       <div className="kali-topbar">
-        <span className="kali-dragon ico-row"><IconTarget size={16} /> Atacante</span>
+        <BrandMark size="sm" mode="Atacante" />
         <span className="kali-title">attack-lab — root@kali · modo missões</span>
         <span className="kali-clock ico-row"><IconTrophy size={14} /> {score} pts · <IconClock size={14} /> {Math.floor(seconds / 60)}:{(seconds % 60).toString().padStart(2, '0')}</span>
       </div>

@@ -3,18 +3,14 @@ import { persona } from '../data/persona'
 import { appMeta } from '../apps/AppView'
 import { EvidenceCard } from '../ui/EvidenceCard'
 import { ProgressBar, StatRow } from '../ui/Progress'
-import { missionCategory } from '../ui/categories'
+import { missionCategory, missionConfidence as confidence } from '../ui/categories'
+import { BrandMark } from '../ui/Brand'
 import { IconAlert, IconShield, IconFolder } from '../ui/icons'
 
 function fmt(s: number) {
   const m = Math.floor(s / 60)
   const sec = s % 60
   return `${m}:${sec.toString().padStart(2, '0')}`
-}
-
-// Força da evidência por missão (direto vs. inferido).
-const confidence: Record<number, number> = {
-  1: 95, 2: 88, 3: 90, 4: 96, 5: 82, 6: 93, 7: 85, 8: 92, 9: 78,
 }
 
 export function Dossier({
@@ -34,19 +30,20 @@ export function Dossier({
 
   return (
     <div className="dossier">
+      <div className="ds-brand"><BrandMark size="sm" /></div>
       <div className="ds-stamp ico-row"><IconFolder size={15} /> DOSSIÊ COMPLETO</div>
       <h2>{persona.name}, {persona.age} · {persona.city}</h2>
 
       <div className="ds-score">
         <StatRow stats={[
-          { label: 'pontos', value: String(score), tone: 'purple' },
+          { label: 'pontos', value: String(score), tone: 'blue' },
           { label: 'acertos', value: `${correctCount}/${missions.length}`, tone: 'ok' },
           { label: 'tempo', value: fmt(seconds) },
         ]} />
       </div>
 
       <div className="ds-progress">
-        <ProgressBar label="Evidências" value={missions.length} max={missions.length} tone="purple" />
+        <ProgressBar label="Evidências" value={missions.length} max={missions.length} tone="cyan" />
         <ProgressBar label="Missões" value={correctCount} max={missions.length} tone="blue" showPct={false} />
         <ProgressBar label="Confiança" value={avgConf} tone="auto" />
       </div>

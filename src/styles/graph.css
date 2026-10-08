@@ -1,0 +1,79 @@
+/* ============================================================
+   Grafo de investigação (seção 11) — SVG (arestas) + HTML (nós)
+   ============================================================ */
+.graph {
+  position: relative; width: 100%; height: 100%; min-height: 460px; overflow: hidden;
+  background:
+    radial-gradient(80% 60% at 50% 45%, color-mix(in srgb, var(--blue) 8%, transparent) 0%, transparent 70%);
+}
+.graph-hint {
+  position: absolute; top: 10px; left: 50%; transform: translateX(-50%); z-index: 5;
+  font-family: var(--mono); font-size: 11px; color: var(--text-3); white-space: nowrap;
+  background: color-mix(in srgb, var(--bg) 70%, transparent); padding: 3px 10px; border-radius: 999px;
+}
+
+/* arestas */
+.graph-edges { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.g-edge {
+  stroke: var(--border-2); stroke-width: 1.4; vector-effect: non-scaling-stroke;
+  stroke-dasharray: 100; stroke-dashoffset: 100; animation: g-draw .7s ease-out forwards;
+}
+@keyframes g-draw { to { stroke-dashoffset: 0; } }
+.g-edge.hot { stroke: var(--cyan); stroke-width: 2; filter: drop-shadow(0 0 3px var(--cyan-soft)); }
+.g-edge.dim { stroke: var(--border); opacity: .3; }
+
+.g-edge-label {
+  position: absolute; transform: translate(-50%, -50%); z-index: 2;
+  font-family: var(--mono); font-size: 10px; color: var(--text-3);
+  background: color-mix(in srgb, var(--bg) 82%, transparent); padding: 1px 6px; border-radius: 6px;
+  pointer-events: none; transition: opacity .2s; white-space: nowrap;
+}
+.g-edge-label.hidden { opacity: 0; }
+
+/* nós */
+.g-node {
+  position: absolute; transform: translate(-50%, -50%); z-index: 3;
+  display: flex; align-items: center; gap: 8px; max-width: 170px;
+  padding: 7px 11px 7px 8px; border-radius: 999px; text-align: left;
+  background: var(--card); border: 1px solid color-mix(in srgb, var(--nc) 55%, var(--border));
+  color: var(--text); cursor: pointer;
+  box-shadow: var(--shadow-1);
+  opacity: 0; animation: g-pop .45s ease-out forwards;
+  transition: border-color .15s, box-shadow .15s, opacity .2s, transform .15s;
+}
+@keyframes g-pop {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(.85); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+.g-node:hover { border-color: var(--nc); box-shadow: 0 0 0 3px color-mix(in srgb, var(--nc) 20%, transparent); }
+.g-node.center {
+  background: color-mix(in srgb, var(--nc) 16%, var(--card));
+  border-color: var(--nc); box-shadow: 0 0 0 3px color-mix(in srgb, var(--nc) 22%, transparent);
+}
+.g-node.hot { border-color: var(--nc); }
+.g-node.dim { opacity: .28; }
+.g-node.sel { box-shadow: 0 0 0 3px color-mix(in srgb, var(--nc) 45%, transparent); border-color: var(--nc); }
+
+.g-node-ic {
+  flex: 0 0 auto; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center;
+  color: var(--nc); background: color-mix(in srgb, var(--nc) 16%, transparent);
+}
+.g-node.center .g-node-ic { width: 38px; height: 38px; }
+.g-node-text { display: flex; flex-direction: column; line-height: 1.15; min-width: 0; }
+.g-node-text b { font-size: 12.5px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.g-node.center .g-node-text b { font-size: 14px; }
+.g-node-text small { font-size: 10.5px; color: var(--text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* detalhe do nó selecionado */
+.graph-detail {
+  position: absolute; left: 14px; bottom: 14px; z-index: 6; max-width: 240px;
+  display: flex; flex-direction: column; gap: 3px;
+  background: var(--panel); border: 1px solid var(--border); border-left: 3px solid var(--nc);
+  border-radius: var(--r-md); padding: 12px 14px; box-shadow: var(--shadow-2);
+  animation: g-pop .3s ease-out;
+}
+.gd-cat { display: inline-flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--nc); }
+.gd-ic { color: var(--nc); display: inline-flex; }
+.gd-value { color: var(--text); font-size: 16px; font-weight: 700; }
+.gd-sub { color: var(--text-2); font-size: 13px; }
+.gd-count { color: var(--text-3); font-family: var(--mono); font-size: 11px; margin-top: 4px; }

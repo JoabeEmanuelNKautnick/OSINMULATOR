@@ -3,15 +3,17 @@ import { createRoot } from 'react-dom/client'
 import { Investigador } from './investigador/Investigador'
 import { Kali } from './kali/Kali'
 import { Atc } from './atc/Atc'
-import { IconSearch, IconTerminal, IconTarget, IconShield } from './ui/icons'
+import { IconSearch, IconTerminal, IconTarget, IconShield, IconGithub } from './ui/icons'
+import logoUrl from '../imgs/osinmulator_logo.png'
 import './styles/base.css'
+
+const GITHUB_URL = 'https://github.com/JoabeEmanuelNKautnick/OSINMULATOR'
 
 function Landing() {
   return (
     <div className="landing">
-      <div className="landing-brand">
-        <span className="landing-logo"><IconSearch size={30} /></span>
-        <h1>OSINT Simulator</h1>
+      <div className="landing-hero">
+        <img src={logoUrl} alt="OSINMULATOR — Simulador de OSINT" />
       </div>
       <div className="landing-tag">Observe. Correlacione. Investigue.</div>
       <p>Plataforma educativa de investigação digital: descubra o que uma pessoa fictícia deixou exposto nas redes.</p>
@@ -32,6 +34,9 @@ function Landing() {
           <small>Para simulações controladas de ataque e demonstrações educacionais.</small>
         </a>
       </div>
+      <a className="gh-btn" href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+        <IconGithub size={18} /> Ver projeto no GitHub
+      </a>
       <p className="landing-foot"><IconShield size={15} /> Pessoa e dados 100% fictícios.</p>
     </div>
   )

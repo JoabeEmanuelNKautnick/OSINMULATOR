@@ -3,10 +3,22 @@
 .kali-banner svg { color: var(--danger); }
 .kali-topbar { display: flex; align-items: center; gap: 14px; padding: 8px 14px; background: var(--panel); border-bottom: 1px solid var(--border); }
 .kali-dragon { font-weight: 700; color: var(--text); }
-.kali-dragon svg { color: var(--purple); }
+.kali-dragon svg { color: var(--cyan); }
 .kali-title { color: var(--text-3); font-family: var(--mono); font-size: 13px; }
 .kali-clock { margin-left: auto; color: var(--text-2); font-family: var(--mono); }
-.kali-clock svg { color: var(--purple); }
+.kali-clock svg { color: var(--blue); }
+
+/* botão Projetar (abre o Modo Palestra) */
+.kproject {
+  display: inline-flex; align-items: center; gap: 7px; margin-left: auto; padding: 7px 14px;
+  border-radius: var(--r-sm); background: var(--cyan-soft);
+  border: 1px solid color-mix(in srgb, var(--cyan) 55%, transparent); color: var(--text);
+  font-weight: 700; font-size: 13px; transition: background .15s, border-color .15s;
+}
+.kproject svg { color: var(--cyan); }
+.kproject:hover { background: color-mix(in srgb, var(--cyan) 22%, transparent); border-color: var(--cyan); }
+/* quando há Projetar, o relógio não precisa mais empurrar sozinho */
+.kali-topbar:has(.kproject) .kali-clock { margin-left: 0; }
 
 .kali-body { flex: 1; display: grid; grid-template-columns: 240px 1fr 1fr; gap: 10px; padding: 10px; overflow: hidden; }
 
@@ -20,10 +32,10 @@
   margin-bottom: 8px; transition: background .12s, border-color .12s;
 }
 .kbtn svg { flex: 0 0 auto; color: var(--text-2); }
-.kbtn:hover { background: var(--card-2); border-color: var(--purple); }
-.kbtn:hover svg { color: var(--purple); }
-.kbtn.prime { background: var(--purple-soft); border-color: color-mix(in srgb, var(--purple) 55%, transparent); color: var(--text); font-weight: 600; }
-.kbtn.prime svg { color: var(--purple); }
+.kbtn:hover { background: var(--card-2); border-color: var(--blue); }
+.kbtn:hover svg { color: var(--blue); }
+.kbtn.prime { background: var(--cyan-soft); border-color: color-mix(in srgb, var(--cyan) 55%, transparent); color: var(--text); font-weight: 600; }
+.kbtn.prime svg { color: var(--cyan); }
 .kbtn.attack:hover { border-color: var(--danger); }
 .kbtn.attack:hover svg { color: var(--danger); }
 .kbtn kbd { margin-left: auto; background: var(--bg); border: 1px solid var(--border-2); border-radius: 4px; padding: 1px 6px; font-size: 11px; color: var(--text-3); }

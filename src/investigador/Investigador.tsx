@@ -117,7 +117,7 @@ export function Investigador() {
             <div className="hud">
               <span className="hud-stat ico-row"><IconTrophy size={15} /> {score} pts</span>
               <div className="hud-prog">
-                <ProgressBar label="Evidências" value={mi} max={missions.length} tone="purple" />
+                <ProgressBar label="Evidências" value={mi} max={missions.length} tone="cyan" />
               </div>
               <span className="hud-stat ico-row"><IconClock size={15} /> {Math.floor(seconds / 60)}:{(seconds % 60).toString().padStart(2, '0')}</span>
             </div>

@@ -31,6 +31,11 @@ export const categories: Record<CategoryKey, Category> = {
   infra:     { key: 'infra',     label: 'Infraestrutura',  Icon: IconServer,   color: 'var(--text-2)' },
 }
 
+/** Força da evidência por missão do Investigador (direto vs. inferido). */
+export const missionConfidence: Record<number, number> = {
+  1: 95, 2: 88, 3: 90, 4: 96, 5: 82, 6: 93, 7: 85, 8: 92, 9: 78,
+}
+
 /** Categoria de cada missão do Investigador (por id). */
 export const missionCategory: Record<number, CategoryKey> = {
   1: 'pessoa',   // nome do pet

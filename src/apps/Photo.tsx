@@ -1,11 +1,12 @@
 import type { PhotoKind } from '../data/persona'
 
-// Imagens reais da Lia (pasta /imgs na raiz), empacotadas pelo Vite.
-const files = import.meta.glob('../../imgs/*.{jpg,jpeg,png}', { eager: true, import: 'default' }) as Record<string, string>
+// Fotos da persona (pasta /imgs na raiz), empacotadas pelo Vite.
+// Só .jpg/.jpeg — as artes de marca (.png) são importadas direto onde são usadas.
+const files = import.meta.glob('../../imgs/*.{jpg,jpeg}', { eager: true, import: 'default' }) as Record<string, string>
 
 const byName: Record<string, string> = {}
 for (const path in files) {
-  const name = path.split('/').pop()!.replace(/\.(jpg|jpeg|png)$/i, '')
+  const name = path.split('/').pop()!.replace(/\.(jpg|jpeg)$/i, '')
   byName[name] = files[path]
 }
 

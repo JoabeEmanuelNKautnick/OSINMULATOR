@@ -1,8 +1,9 @@
-export type Tone = 'purple' | 'blue' | 'ok' | 'warn' | 'danger'
+export type Tone = 'blue' | 'cyan' | 'purple' | 'ok' | 'warn' | 'danger'
 
 const toneVar: Record<Tone, string> = {
-  purple: 'var(--purple)',
   blue: 'var(--blue)',
+  cyan: 'var(--cyan)',
+  purple: 'var(--purple)',
   ok: 'var(--ok)',
   warn: 'var(--warn)',
   danger: 'var(--danger)',
@@ -10,7 +11,7 @@ const toneVar: Record<Tone, string> = {
 
 /** Barra rotulada com percentual. tone 'auto' escolhe a cor pela faixa. */
 export function ProgressBar({
-  label, value, max = 100, tone = 'purple', showPct = true,
+  label, value, max = 100, tone = 'blue', showPct = true,
 }: {
   label?: string
   value: number

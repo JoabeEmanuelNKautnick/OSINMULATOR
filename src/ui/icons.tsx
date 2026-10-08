@@ -127,3 +127,24 @@ export const IconBattery: Icon = (p) => (
 export const IconFolder: Icon = (p) => (
   <svg {...base(p)}><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg>
 )
+export const IconGithub: Icon = (p) => (
+  <svg {...base(p)}><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3-.3 6.2-1.5 6.2-6.7a5.2 5.2 0 0 0-1.5-3.6 4.8 4.8 0 0 0-.1-3.6s-1.2-.4-3.9 1.5a13.4 13.4 0 0 0-7 0C6.1 1.1 4.9 1.5 4.9 1.5a4.8 4.8 0 0 0-.1 3.6A5.2 5.2 0 0 0 3.3 8.7c0 5.2 3.1 6.4 6.1 6.7a3.4 3.4 0 0 0-.9 2.6V22" /></svg>
+)
+export const IconProjector: Icon = (p) => (
+  <svg {...base(p)}><rect x="3" y="7" width="18" height="11" rx="2" /><circle cx="14" cy="12.5" r="3" /><path d="M7 11.5h0M7 14.5h0M18 20l-1-2M6 20l1-2" /></svg>
+)
+export const IconMaximize: Icon = (p) => (
+  <svg {...base(p)}><path d="M4 9V5a1 1 0 0 1 1-1h4M20 9V5a1 1 0 0 0-1-1h-4M4 15v4a1 1 0 0 0 1 1h4M20 15v4a1 1 0 0 1-1 1h-4" /></svg>
+)
+export const IconX: Icon = (p) => (
+  <svg {...base(p)}><path d="M6 6l12 12M18 6L6 18" /></svg>
+)
+export const IconEye: Icon = (p) => (
+  <svg {...base(p)}><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" /><circle cx="12" cy="12" r="3" /></svg>
+)
+export const IconGraph: Icon = (p) => (
+  <svg {...base(p)}><circle cx="6" cy="6" r="2.5" /><circle cx="18" cy="7" r="2.5" /><circle cx="12" cy="18" r="2.5" /><path d="M7.8 7.6l2.6 8M16.6 8.9l-3 7M8.3 6.4l7.3.4" /></svg>
+)
+export const IconPaw: Icon = (p) => (
+  <svg {...base(p)}><ellipse cx="7" cy="8.5" rx="1.7" ry="2.3" /><ellipse cx="12" cy="6.5" rx="1.7" ry="2.3" /><ellipse cx="17" cy="8.5" rx="1.7" ry="2.3" /><path d="M12 12c-2.8 0-5 2-5 4.2 0 1.6 1.3 2.3 2.6 1.9 1.6-.5 3.2-.5 4.8 0 1.3.4 2.6-.3 2.6-1.9C17 14 14.8 12 12 12z" /></svg>
+)

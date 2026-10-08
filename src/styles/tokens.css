@@ -4,22 +4,23 @@
    ============================================================ */
 
 :root {
-  /* ---- Base (superfícies dark) ---- */
-  --bg: #080b10;        /* fundo principal */
-  --panel: #0e141c;     /* painéis */
-  --card: #141c26;      /* cards */
-  --card-2: #0f1821;    /* card recuado / input */
-  --border: #1d2935;    /* bordas */
-  --border-2: #26333f;  /* borda hover/realce suave */
+  /* ---- Base (superfícies dark, azul-petróleo como na logo) ---- */
+  --bg: #070b14;        /* fundo principal */
+  --panel: #0c1420;     /* painéis */
+  --card: #111c2b;      /* cards */
+  --card-2: #0d1826;    /* card recuado / input */
+  --border: #1c2d40;    /* bordas */
+  --border-2: #27405a;  /* borda hover/realce suave */
   --text: #f4f4f5;      /* texto principal */
   --text-2: #94a3b8;    /* texto secundário */
   --text-3: #5f7384;    /* texto terciário / labels */
 
-  /* ---- Identidade ---- */
-  --purple: #7c5cff;    /* roxo principal */
-  --blue: #5b8cff;      /* azul */
+  /* ---- Identidade (azul/ciano como na logo) ---- */
+  --blue: #2b7fff;      /* azul principal */
+  --cyan: #4fc3f7;      /* ciano / brilho e realce */
+  --purple: #7c5cff;    /* roxo — acento secundário pontual */
   --purple-2: #a855f7;  /* roxo destaque */
-  --accent: var(--purple);
+  --accent: var(--blue);
 
   /* ---- Estados ---- */
   --ok: #22c55e;        /* confirmado / sucesso */
@@ -27,8 +28,9 @@
   --danger: #ef4444;    /* perigo / erro */
 
   /* ---- Tons translúcidos (fundos de realce) ---- */
+  --blue-soft: rgba(43, 127, 255, 0.14);
+  --cyan-soft: rgba(79, 195, 247, 0.14);
   --purple-soft: rgba(124, 92, 255, 0.14);
-  --blue-soft: rgba(91, 140, 255, 0.14);
   --ok-soft: rgba(34, 197, 94, 0.14);
   --warn-soft: rgba(245, 158, 11, 0.14);
   --danger-soft: rgba(239, 68, 68, 0.14);
@@ -42,7 +44,8 @@
   /* ---- Sombra / elevação ---- */
   --shadow-1: 0 2px 10px rgba(0, 0, 0, 0.35);
   --shadow-2: 0 12px 30px rgba(0, 0, 0, 0.45);
-  --glow-purple: 0 0 0 3px var(--purple-soft);
+  --glow-blue: 0 0 0 3px var(--blue-soft);
+  --glow-cyan: 0 0 18px rgba(79, 195, 247, 0.45);
 
   /* ---- Espaçamento ---- */
   --sp-1: 4px;

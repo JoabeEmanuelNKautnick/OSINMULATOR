@@ -6,7 +6,10 @@ import { AppView, appMeta } from '../apps/AppView'
 import {
   DossierPanel, WordlistPanel, RecoveryPanel, PhishingPanel, RiskMapPanel,
 } from './attacks/panels'
-import { IconTerminal, IconAlert, IconPlay, IconKey, IconUnlock, IconMask, IconMap, type Icon } from '../ui/icons'
+import { IconAlert, IconPlay, IconKey, IconUnlock, IconMask, IconMap, IconProjector, IconGraph, type Icon } from '../ui/icons'
+import { BrandMark } from '../ui/Brand'
+import { Palestra } from '../palestra/Palestra'
+import { InvestigationGraph } from '../ui/InvestigationGraph'
 import '../styles/kali.css'
 
 type View =
@@ -16,6 +19,7 @@ type View =
   | { kind: 'recovery' }
   | { kind: 'phishing' }
   | { kind: 'riskmap' }
+  | { kind: 'graph' }
 
 function reconLines(): Line[] {
   const out: Line[] = [{ text: 'recon --target lia.andrade --all', cls: 'cmd' }]
@@ -85,6 +89,7 @@ export function Kali() {
     { text: 'Clique em "Recon completo" para reconstruir o dossiê.', cls: 'dim' },
   ])
   const [view, setView] = useState<View>({ kind: 'dossier' })
+  const [presenting, setPresenting] = useState(false)
 
   function runRecon() { setLines(reconLines()); setView({ kind: 'dossier' }) }
   function runAttack(key: keyof typeof attacks) {
@@ -95,25 +100,39 @@ export function Kali() {
     setLines([{ text: `cat evidence/${app}.json`, cls: 'cmd' }, { text: '[+] renderizando captura...', cls: 'dim' }])
     setView({ kind: 'app', app })
   }
+  function runGraph() {
+    setLines([
+      { text: 'graph --build --from-dossier', cls: 'cmd' },
+      { text: '  [*] correlacionando pessoas, contas, locais e eventos...', cls: 'dim' },
+      { text: '  [ok] 12 nós · 14 conexões', cls: 'ok' },
+    ])
+    setView({ kind: 'graph' })
+  }
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
+      if (presenting) return // atalhos do Analista ficam mudos durante a projeção
       if (e.key === 'Enter') runRecon()
       const map: Record<string, keyof typeof attacks> = { '1': 'wordlist', '2': 'recovery', '3': 'phishing', '4': 'riskmap' }
       if (map[e.key]) runAttack(map[e.key])
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [])
+  }, [presenting])
 
   return (
     <div className="kali">
       <div className="kali-banner ico-row"><IconAlert size={14} /> SIMULAÇÃO EDUCATIVA — pessoa e dados 100% fictícios. Nenhuma ferramenta real é executada.</div>
       <div className="kali-topbar">
-        <span className="kali-dragon ico-row"><IconTerminal size={16} /> Analista</span>
+        <BrandMark size="sm" mode="Analista" />
         <span className="kali-title">osint-toolkit — root@kali</span>
+        <button className="kproject" onClick={() => setPresenting(true)}>
+          <IconProjector size={16} /> Projetar
+        </button>
         <span className="kali-clock">{new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</span>
       </div>
+
+      {presenting && <Palestra onExit={() => setPresenting(false)} />}
 
       <div className="kali-body">
         <aside className="kali-side">
@@ -130,6 +149,10 @@ export function Kali() {
                 )
               })}
             </div>
+          </div>
+          <div className="kali-group">
+            <h4>Inteligência</h4>
+            <button className="kbtn" onClick={runGraph}><IconGraph size={16} /> Grafo de conexões</button>
           </div>
           <div className="kali-group">
             <h4>Ataques simulados</h4>
@@ -160,6 +183,7 @@ export function Kali() {
             {view.kind === 'recovery' && <RecoveryPanel />}
             {view.kind === 'phishing' && <PhishingPanel />}
             {view.kind === 'riskmap' && <RiskMapPanel />}
+            {view.kind === 'graph' && <InvestigationGraph />}
           </div>
         </section>
       </div>
@@ -175,5 +199,6 @@ function viewTitle(v: View) {
     case 'recovery': return 'account-recovery'
     case 'phishing': return 'social-engineering'
     case 'riskmap': return 'geo-risk'
+    case 'graph': return 'graph://connections'
   }
 }

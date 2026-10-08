@@ -35,7 +35,7 @@
 .ev-card.is-new { animation: ev-pop .5s ease-out, ev-glow 1.6s ease-out; }
 @keyframes ev-pop { from { opacity: 0; transform: translateY(8px) scale(.98); } to { opacity: 1; transform: none; } }
 @keyframes ev-glow {
-  0% { box-shadow: 0 0 0 0 var(--purple-soft); border-color: var(--purple); }
+  0% { box-shadow: 0 0 0 0 var(--cyan-soft); border-color: var(--cyan); }
   100% { box-shadow: 0 0 0 6px transparent; border-color: var(--border); }
 }
 
@@ -55,3 +55,21 @@
 /* ---- helper: alinhar ícone + texto inline ---- */
 .ico-row { display: inline-flex; align-items: center; gap: 7px; }
 .ico-row svg { flex: 0 0 auto; }
+
+/* ---- Marca OSINMULATOR (letreiro + emblema) ---- */
+.brand { display: inline-flex; align-items: center; gap: 10px; }
+.brand svg { flex: 0 0 auto; }
+.brand-text { display: flex; flex-direction: column; gap: 2px; }
+.brand-word { display: inline-flex; align-items: center; gap: 7px; }
+.brand-letreiro { width: auto; display: block; }
+.brand-mode { color: var(--text-3); font-weight: 600; font-family: var(--mono); }
+.brand-sub { color: var(--text-3); font-family: var(--mono); letter-spacing: 2px; text-transform: uppercase; }
+.brand-sm .brand-letreiro { height: 15px; }
+.brand-sm .brand-mode { font-size: 12px; }
+.brand-sm .brand-sub { font-size: 9px; }
+.brand-md .brand-letreiro { height: 20px; }
+.brand-md .brand-mode { font-size: 13px; }
+.brand-md .brand-sub { font-size: 10px; }
+.brand-lg .brand-letreiro { height: 30px; }
+.brand-lg .brand-mode { font-size: 15px; }
+.brand-lg .brand-sub { font-size: 12px; margin-top: 2px; }
