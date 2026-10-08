@@ -6,10 +6,11 @@ import { AppView, appMeta } from '../apps/AppView'
 import {
   DossierPanel, WordlistPanel, RecoveryPanel, PhishingPanel, RiskMapPanel,
 } from './attacks/panels'
-import { IconAlert, IconPlay, IconKey, IconUnlock, IconMask, IconMap, IconProjector, IconGraph, type Icon } from '../ui/icons'
+import { IconAlert, IconPlay, IconKey, IconUnlock, IconMask, IconMap, IconProjector, IconGraph, IconClock, type Icon } from '../ui/icons'
 import { BrandMark } from '../ui/Brand'
 import { Palestra } from '../palestra/Palestra'
 import { InvestigationGraph } from '../ui/InvestigationGraph'
+import { InvestigationTimeline } from '../ui/InvestigationTimeline'
 import '../styles/kali.css'
 
 type View =
@@ -20,6 +21,7 @@ type View =
   | { kind: 'phishing' }
   | { kind: 'riskmap' }
   | { kind: 'graph' }
+  | { kind: 'timeline' }
 
 function reconLines(): Line[] {
   const out: Line[] = [{ text: 'recon --target lia.andrade --all', cls: 'cmd' }]
@@ -108,6 +110,14 @@ export function Kali() {
     ])
     setView({ kind: 'graph' })
   }
+  function runTimeline() {
+    setLines([
+      { text: 'timeline --from-dossier', cls: 'cmd' },
+      { text: '  [*] ordenando descobertas por horário...', cls: 'dim' },
+      { text: '  [ok] linha do tempo reconstruída', cls: 'ok' },
+    ])
+    setView({ kind: 'timeline' })
+  }
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -153,6 +163,7 @@ export function Kali() {
           <div className="kali-group">
             <h4>Inteligência</h4>
             <button className="kbtn" onClick={runGraph}><IconGraph size={16} /> Grafo de conexões</button>
+            <button className="kbtn" onClick={runTimeline}><IconClock size={16} /> Linha do tempo</button>
           </div>
           <div className="kali-group">
             <h4>Ataques simulados</h4>
@@ -184,6 +195,7 @@ export function Kali() {
             {view.kind === 'phishing' && <PhishingPanel />}
             {view.kind === 'riskmap' && <RiskMapPanel />}
             {view.kind === 'graph' && <InvestigationGraph />}
+            {view.kind === 'timeline' && <InvestigationTimeline />}
           </div>
         </section>
       </div>
@@ -200,5 +212,6 @@ function viewTitle(v: View) {
     case 'phishing': return 'social-engineering'
     case 'riskmap': return 'geo-risk'
     case 'graph': return 'graph://connections'
+    case 'timeline': return 'timeline.log'
   }
 }

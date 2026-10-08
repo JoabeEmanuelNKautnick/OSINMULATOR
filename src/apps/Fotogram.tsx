@@ -1,5 +1,13 @@
 import { persona, posts } from '../data/persona'
 import { Photo, avatarSrc } from './Photo'
+import { Clue } from './Clue'
+import type { CategoryKey } from '../ui/categories'
+
+// Comentários de familiares que expõem parentesco.
+const commentClue: Record<string, { cat: CategoryKey; insight: string }> = {
+  'sandra.andrade73': { cat: 'pessoa', insight: 'Comentou "minha filha" → é a mãe. Parentesco útil para golpe do parente.' },
+  'rosa.andrade': { cat: 'pessoa', insight: 'Comentou "netinha" → é a avó.' },
+}
 
 export function Fotogram({ highlight }: { highlight?: string }) {
   return (
@@ -28,7 +36,11 @@ export function Fotogram({ highlight }: { highlight?: string }) {
               <span className="fg-mini">{avatarSrc ? <img src={avatarSrc} alt="" /> : '🌻'}</span>
               <div>
                 <b>{persona.fotogram.handle}</b>
-                {p.location && <span className="fg-loc">{p.location}</span>}
+                {p.location && (
+                  <span className="fg-loc">
+                    <Clue cat="local" insight="Local marcado no post — ajuda a mapear lugares frequentados e a cidade.">{p.location}</Clue>
+                  </span>
+                )}
               </div>
             </div>
             <Photo kind={p.photo} />
@@ -36,11 +48,14 @@ export function Fotogram({ highlight }: { highlight?: string }) {
             <div className="fg-cap">
               <b>{persona.fotogram.handle}</b> {p.caption}
             </div>
-            {p.comments.map((c, i) => (
-              <div key={i} className="fg-comment">
-                <b>{c.author}</b> {c.text}
-              </div>
-            ))}
+            {p.comments.map((c, i) => {
+              const cl = commentClue[c.author]
+              return (
+                <div key={i} className="fg-comment">
+                  {cl ? <Clue cat={cl.cat} insight={cl.insight}><b>{c.author}</b></Clue> : <b>{c.author}</b>} {c.text}
+                </div>
+              )
+            })}
             <div className="fg-date">{p.date}</div>
           </article>
         ))}

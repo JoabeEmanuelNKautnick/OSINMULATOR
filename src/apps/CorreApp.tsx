@@ -1,6 +1,7 @@
 import { persona, runs } from '../data/persona'
 import { RouteMap } from './RouteMap'
 import { avatarSrc } from './Photo'
+import { Clue } from './Clue'
 
 export function CorreApp({ highlight }: { highlight?: string }) {
   return (
@@ -26,11 +27,18 @@ export function CorreApp({ highlight }: { highlight?: string }) {
             <RouteMap run={r} small />
             <div className="ca-metrics">
               <div><b>{r.km}</b><span>km</span></div>
-              <div><b>{r.start}</b><span>início</span></div>
+              <div>
+                <b><Clue cat="evento" insight="Horário de saída. Repetido em vários dias, revela uma rotina previsível.">{r.start}</Clue></b>
+                <span>início</span>
+              </div>
               <div><b>{r.end}</b><span>fim</span></div>
               <div><b>{r.pace}</b><span>ritmo</span></div>
             </div>
-            <div className="ca-place">📍 {r.startPlace} → {r.endPlace}</div>
+            <div className="ca-place">
+              📍 <Clue cat="local" insight={r.route === 'loop'
+                ? 'Início e fim na mesma rua, repetidos → provável endereço de casa.'
+                : 'Ponto de partida revela a região frequentada pela pessoa.'}>{r.startPlace}</Clue> → {r.endPlace}
+            </div>
           </article>
         ))}
       </div>
