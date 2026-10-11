@@ -71,7 +71,7 @@ Os exames seguiram as boas práticas de cadeia de custódia e de forense digital
 
 **6.3.2 Últimas atividades —** Último desbloqueio registrado em 27/12/2026, às 22h31; última utilização de aplicativo (ChatApp) às 22h36; registros fotográficos compatíveis com viagem litorânea da família no período de 20 a 27/12/2026. Nenhuma atividade posterior registrada no dispositivo.
 
-**6.3.3 ChatApp —** Histórico de conversas entre a vítima e o contato "Mãe" constante do aparelho (Anexo A). Não foi identificada no dispositivo qualquer comunicação relacionada ao número \+55 (120) 9 0000-1111.
+**6.3.3 ChatApp —** Histórico de conversas entre a vítima e o contato "Mãe" constante do aparelho (Anexo A). Não foi identificada no dispositivo qualquer comunicação relacionada ao número \+55 (120) 9 8412-7705.
 
 **6.3.4 Aplicativos bancários —** Não foi localizado no aparelho aplicativo, credencial ou chave de acesso vinculados ao Banco Menteris S.A. Aplicativo do Banco Serrano S.A. (instituição habitual da vítima) presente, sem acessos registrados após 27/12/2026.
 
@@ -83,7 +83,7 @@ Os exames seguiram as boas práticas de cadeia de custódia e de forense digital
 
 **Ao quesito 2:** Última atividade registrada em 27/12/2026, às 22h36; nenhuma atividade posterior.
 
-**Ao quesito 3:** Nada consta quanto ao número \+55 (120) 9 8412-7705; conversas com o contato "Mãe" presentes (Anexo A); não localizados elementos vinculados ao Banco Menteris S.A.
+**Ao quesito 3:** Nada consta quanto ao número \+55 (120) 9 8412-7705; conversas com o contato "Mãe"; não localizados elementos vinculados ao Banco Menteris S.A.
 
 **Ao quesito 4:** Não foram identificados indícios de uso por terceiro, exclusão de dados ou acesso remoto.
 
