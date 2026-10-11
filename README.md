@@ -148,6 +148,8 @@ Um caso é um pacote autossuficiente de dados. Para adicionar um novo (`case_02`
 
 O seletor da tela inicial e as três visões passam a funcionar automaticamente com `?...&case=case_02`.
 
+> 📄 **Autos do caso:** para montar o inquérito (IPL) e os laudos, use os modelos editáveis em [`src/template-case/`](src/template-case/) (`.docx`) — inquérito policial, laudo IML, necropsia e laudo pericial. Preencha, exporte em PDF para a pasta `pdf/` do caso e aponte em `docs.ts`.
+
 ---
 
 ## 🎨 Identidade visual
