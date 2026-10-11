@@ -6,12 +6,13 @@ import { AppView, appMeta } from '../apps/AppView'
 import {
   DossierPanel, WordlistPanel, RecoveryPanel, PhishingPanel, RiskMapPanel,
 } from './attacks/panels'
-import { IconAlert, IconPlay, IconKey, IconUnlock, IconMask, IconMap, IconProjector, IconGraph, IconClock, type Icon } from '../ui/icons'
+import { IconAlert, IconPlay, IconKey, IconUnlock, IconMask, IconMap, IconProjector, IconGraph, IconClock, IconFile, type Icon } from '../ui/icons'
 import { BrandMark } from '../ui/Brand'
 import { BackButton } from '../ui/BackButton'
 import { Palestra } from '../palestra/Palestra'
 import { InvestigationGraph } from '../ui/InvestigationGraph'
 import { InvestigationTimeline } from '../ui/InvestigationTimeline'
+import { CaseFiles } from '../ui/CaseFiles'
 import '../styles/kali.css'
 
 type View =
@@ -93,6 +94,7 @@ export function Kali() {
   ])
   const [view, setView] = useState<View>({ kind: 'dossier' })
   const [presenting, setPresenting] = useState(false)
+  const [showDocs, setShowDocs] = useState(false)
 
   function runRecon() { setLines(reconLines()); setView({ kind: 'dossier' }) }
   function runAttack(key: keyof typeof attacks) {
@@ -122,14 +124,14 @@ export function Kali() {
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if (presenting) return // atalhos do Analista ficam mudos durante a projeção
+      if (presenting || showDocs) return // atalhos mudos durante projeção / autos abertos
       if (e.key === 'Enter') runRecon()
       const map: Record<string, keyof typeof attacks> = { '1': 'wordlist', '2': 'recovery', '3': 'phishing', '4': 'riskmap' }
       if (map[e.key]) runAttack(map[e.key])
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [presenting])
+  }, [presenting, showDocs])
 
   return (
     <div className="kali">
@@ -145,6 +147,7 @@ export function Kali() {
       </div>
 
       {presenting && <Palestra onExit={() => setPresenting(false)} />}
+      {showDocs && <CaseFiles unlockedAll onClose={() => setShowDocs(false)} />}
 
       <div className="kali-body">
         <aside className="kali-side">
@@ -166,6 +169,7 @@ export function Kali() {
             <h4>Inteligência</h4>
             <button className="kbtn" onClick={runGraph}><IconGraph size={16} /> Grafo de conexões</button>
             <button className="kbtn" onClick={runTimeline}><IconClock size={16} /> Linha do tempo</button>
+            <button className="kbtn" onClick={() => setShowDocs(true)}><IconFile size={16} /> Autos do caso</button>
           </div>
           <div className="kali-group">
             <h4>Ataques simulados</h4>

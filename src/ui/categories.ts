@@ -31,33 +31,9 @@ export const categories: Record<CategoryKey, Category> = {
   infra:     { key: 'infra',     label: 'Infraestrutura',  Icon: IconServer,   color: 'var(--text-2)' },
 }
 
-/** Força da evidência por missão do Investigador (direto vs. inferido). */
-export const missionConfidence: Record<number, number> = {
-  1: 95, 2: 88, 3: 90, 4: 96, 5: 82, 6: 93, 7: 85, 8: 92, 9: 78,
-}
+/* Mapas específicos do CASO ATIVO (categoria/confiança por missão e passo). */
+import { activeCase } from '../cases/active'
 
-/** Categoria de cada missão do Investigador (por id). */
-export const missionCategory: Record<number, CategoryKey> = {
-  1: 'pessoa',   // nome do pet
-  2: 'data',     // nascimento
-  3: 'pessoa',   // mãe
-  4: 'empresa',  // trabalho
-  5: 'local',    // rua
-  6: 'local',    // número da casa
-  7: 'evento',   // rotina
-  8: 'evento',   // viagem
-  9: 'conta',    // senha
-}
-
-/** Categoria de cada passo do modo Atacante (por id). */
-export const attackCategory: Record<number, CategoryKey> = {
-  1: 'conta',    // vetor
-  2: 'conta',    // wordlist
-  3: 'conta',    // senha
-  4: 'pessoa',   // recuperação (pet)
-  5: 'pessoa',   // recuperação (mãe)
-  6: 'empresa',  // engenharia social
-  7: 'local',    // endereço
-  8: 'evento',   // janela de viagem
-  9: 'evento',   // rotina
-}
+export const missionConfidence = activeCase.missionConfidence
+export const missionCategory = activeCase.missionCategory
+export const attackCategory = activeCase.attackCategory

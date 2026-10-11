@@ -44,6 +44,38 @@ a { text-decoration: none; color: inherit; }
 .gh-btn:hover svg { color: var(--accent); }
 .landing-foot { color: var(--text-3); font-size: 13px; display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; }
 
+/* Seletor de casos */
+.case-cards { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin: 22px 0; }
+.case-card {
+  width: 230px; padding: 20px; border-radius: var(--r-lg); display: flex; flex-direction: column;
+  align-items: center; gap: 6px; text-align: center; cursor: pointer;
+  border: 1px solid var(--border); background: var(--card); color: var(--text);
+  transition: transform .15s, border-color .15s, box-shadow .15s;
+}
+.case-card:hover { transform: translateY(-4px); border-color: var(--cyan); box-shadow: var(--shadow-2); }
+.case-thumb {
+  width: 72px; height: 72px; border-radius: 50%; overflow: hidden; margin-bottom: 4px;
+  border: 2px solid var(--cyan); background: var(--card-2);
+}
+.case-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.case-tag { font-family: var(--mono); font-size: 11px; letter-spacing: 2px; color: var(--cyan); }
+.case-card b { font-size: 18px; }
+.case-card small { color: var(--text-2); font-size: 13px; }
+.case-card.soon {
+  cursor: default; color: var(--text-3); border-style: dashed; justify-content: center;
+  background: transparent; font-family: var(--mono); letter-spacing: 1px;
+}
+.case-card.soon:hover { transform: none; border-color: var(--border); box-shadow: none; }
+.case-back {
+  display: inline-flex; align-items: center; gap: 4px; background: none; border: none;
+  color: var(--text-2); font-size: 13px; cursor: pointer; margin-top: 4px;
+}
+.case-back:hover { color: var(--cyan); }
+.case-current {
+  font-family: var(--mono); font-size: 13px; color: var(--text); letter-spacing: 1px;
+  background: var(--card); border: 1px solid var(--border); border-radius: 999px; padding: 6px 16px; margin-top: 2px;
+}
+
 /* ===== Botão de voltar ao início ===== */
 .back-home { background: none; border: none; padding: 0; cursor: pointer; line-height: 0; transition: transform .12s, filter .12s; }
 .back-home img { height: 30px; width: auto; display: block; }

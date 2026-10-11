@@ -67,6 +67,13 @@
 .mp-next { padding: 10px 18px; border: none; border-radius: var(--r-sm); background: var(--blue); color: #061021; font-weight: 700; font-size: 14px; }
 
 /* ===== Dossiê ===== */
+.app-screen.dossier-screen { background: var(--bg); }
+.ds-docs-cta {
+  display: flex; align-items: center; justify-content: center; gap: 8px; width: calc(100% - 32px);
+  margin: 16px 16px 0; padding: 13px; border: none; border-radius: var(--r-md);
+  background: var(--cyan); color: #062031; font-weight: 800; font-size: 14px; box-shadow: var(--glow-cyan);
+}
+
 .dossier { padding: 20px 16px 40px; background: var(--bg); color: var(--text); min-height: 100%; }
 .ds-brand { margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
 .ds-stamp { display: inline-flex; color: var(--danger); border: 2px solid var(--danger); padding: 4px 10px; font-family: var(--mono); font-weight: 700; letter-spacing: 2px; transform: rotate(-3deg); border-radius: 4px; }

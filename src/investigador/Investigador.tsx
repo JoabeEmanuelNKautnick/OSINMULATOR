@@ -4,9 +4,11 @@ import { persona } from '../data/persona'
 import { AppView, appMeta } from '../apps/AppView'
 import { MissionPanel } from './MissionPanel'
 import { Dossier } from './Dossier'
-import { IconSearch, IconLock, IconTrophy, IconClock, IconWifi, IconBattery } from '../ui/icons'
+import { IconSearch, IconLock, IconTrophy, IconClock, IconWifi, IconBattery, IconFile } from '../ui/icons'
 import { ProgressBar } from '../ui/Progress'
 import { BackButton } from '../ui/BackButton'
+import { CaseFiles } from '../ui/CaseFiles'
+import { activeCase } from '../cases/active'
 import '../styles/phone.css'
 import '../styles/forensic.css'
 
@@ -22,6 +24,14 @@ export function Investigador() {
   const [correct, setCorrect] = useState(0)
   const [seconds, setSeconds] = useState(0)
   const timer = useRef<number | null>(null)
+
+  const DONE_KEY = `osintmulator:${activeCase.id}:done`
+  const [completed, setCompleted] = useState(() => {
+    try { return localStorage.getItem(DONE_KEY) === '1' } catch { return false }
+  })
+  const [showDocs, setShowDocs] = useState(false)
+  const [docsInitial, setDocsInitial] = useState<string | undefined>(undefined)
+  function openDocs(initial?: string) { setDocsInitial(initial); setShowDocs(true) }
 
   useEffect(() => {
     if (phase === 'playing') {
@@ -40,6 +50,8 @@ export function Investigador() {
     if (ok) setCorrect((c) => c + 1)
     if (mi + 1 >= missions.length) {
       if (timer.current) window.clearInterval(timer.current)
+      setCompleted(true)
+      try { localStorage.setItem(DONE_KEY, '1') } catch { /* ignora */ }
       setPhase('dossier')
     } else {
       setMi((i) => i + 1)
@@ -85,9 +97,14 @@ export function Investigador() {
                 )
               })}
             </div>
-            <button className="home-start" onClick={startInvestigation}>
-              <IconSearch size={18} /> Iniciar investigação
-            </button>
+            <div className="home-actions">
+              <button className="home-docs" onClick={() => openDocs()}>
+                <IconFile size={17} /> Autos do caso
+              </button>
+              <button className="home-start" onClick={startInvestigation}>
+                <IconSearch size={18} /> Iniciar investigação
+              </button>
+            </div>
             <p className="home-disclaimer">Simulação educativa · pessoa e dados fictícios</p>
           </div>
         )}
@@ -138,11 +155,18 @@ export function Investigador() {
 
         {/* DOSSIÊ */}
         {phase === 'dossier' && (
-          <div className="app-screen">
+          <div className="app-screen dossier-screen">
+            <button className="ds-docs-cta" onClick={() => openDocs('npd')}>
+              <IconFile size={18} /> Laudo Pericial liberado — abrir autos
+            </button>
             <Dossier score={score} seconds={seconds} correctCount={correct} onRestart={restart} />
           </div>
         )}
       </div>
+
+      {showDocs && (
+        <CaseFiles unlockedAll={completed} initialDoc={docsInitial} onClose={() => setShowDocs(false)} />
+      )}
     </div>
   )
 }
