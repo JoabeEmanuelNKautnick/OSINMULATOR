@@ -61,7 +61,7 @@ const photoDetails: PhotoDetails = {
 export const case03: Case = {
   id: 'case_03',
   number: '03',
-  name: 'Marie Joan Elise Salles',
+  name: '26 Anos de Silêncio',
   city: 'Londres',
 
   kind: 'documental',

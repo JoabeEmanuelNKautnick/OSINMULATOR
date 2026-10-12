@@ -17,7 +17,7 @@
 </div>
 
 > [!WARNING]
-> **Tudo aqui é ficção.** As personas (*Lia Andrade*; *Mirosvalikov/"Baravsholov"*), as cidades (*Vila Serrana*; *Napoli*), a agência *AICOI*, os apps, as fotos, as imagens de CCTV, os documentos (inquérito, laudos, denúncia, Red Wanted, mandado) e todos os dados são **100% fictícios** — inclusive os cenários de crime, criados apenas como contexto de investigação. Nenhuma ferramenta real de ataque é executada. O objetivo é **conscientização sobre privacidade e educação em OSINT/forense**, não ensinar a atacar ninguém.
+> **Tudo aqui é ficção.** As personas (*Lia Andrade*; *Mirosvalikov/"Baravsholov"*; *Marie Salles*), as cidades (*Vila Serrana*; *Napoli*; *Londres/Montbleu*), a agência *AICOI*, os apps, as fotos, as imagens de CCTV, os documentos (inquérito, laudos, denúncia, Red Wanted, mandado, registro de desaparecimento, testemunho, alerta amarelo) e todos os dados são **100% fictícios** — inclusive os cenários de crime e desaparecimento, criados apenas como contexto de investigação. Nenhuma ferramenta real de ataque é executada. O objetivo é **conscientização sobre privacidade e educação em OSINT/forense**, não ensinar a atacar ninguém.
 
 ---
 
@@ -25,7 +25,9 @@
 
 Cada investigação é um **caso**, e cada caso pode ter uma natureza própria. O caso inicial — `case_01` — acompanha a apuração fictícia envolvendo **Lia Andrade**: o investigador lê os **autos oficiais** (inquérito e laudos), levanta tudo o que a vítima deixou exposto publicamente (**OSINT**) e, ao concluir, libera o **laudo pericial** final.
 
-Já o `case_02` — **Operação Baravsholov** — é um caso **documental**: no "Portal AICOI" (fictício), o investigador cruza uma denúncia anônima com Red Wanted, mandado e imagens de CCTV para **localizar um procurado a tempo**. São dois formatos sobre a mesma base: **observar, correlacionar e concluir com evidências**.
+Já o `case_02` — **Operação Baravsholov** — é um caso **documental**: no "Portal AICOI" (fictício), o investigador cruza uma denúncia anônima com Red Wanted, mandado e imagens de CCTV para **localizar um procurado a tempo**.
+
+E o `case_03` — **26 anos de silêncio** — leva o formato documental ao extremo: um **caso frio** e deliberadamente **inconclusivo**. O investigador reabre o desaparecimento de **Marie Salles** (Londres, 2000), reconstrói a cronologia, classifica **fato × relato × hipótese** e entrega um **relatório graduado em 4 finais** — sem transformar suspeita em certeza. São três formatos sobre a mesma base: **observar, correlacionar e concluir com evidências**.
 
 No fim, fica claro o estrago que pistas soltas somadas podem causar — e, mais importante, **como cada pista poderia ter sido evitada**.
 
@@ -45,7 +47,7 @@ A tela inicial tem um **seletor de casos** → depois você escolhe a visão. As
 
 > 🎲 **Dinâmica sugerida:** o público joga de `?investigador` e um voluntário joga de `?atc` ao mesmo tempo — um descobre as pistas, o outro mostra o que um atacante faria com elas.
 
-> ℹ️ **As visões variam por caso.** A tabela acima descreve o `case_01`. O `case_02` reimagina cada visão como um ambiente da AICOI (veja a seção [Casos](#️-casos)) e **bloqueia o Atacante** — é uma investigação documental, sem rota jogável de ataque.
+> ℹ️ **As visões variam por caso.** A tabela acima descreve o `case_01`. Os casos documentais (`case_02` e `case_03`) reimaginam cada visão como um ambiente da AICOI (veja a seção [Casos](#️-casos)) e **bloqueiam o Atacante** — são investigações documentais, sem rota jogável de ataque.
 
 ---
 
@@ -99,6 +101,18 @@ Documentos oficiais fictícios que acompanham a investigação (abrem em pop-up 
 
 > Todos liberados desde o início. Além dos autos, o `case_02` traz **stills de CCTV** que chegam no app de **Mensagens** e um **Fichário** (foto do rosto + retrato falado).
 
+**`case_03` — Marie Salles**
+
+| Documento | Observação |
+|-----------|------------|
+| **Registro de Desaparecimento** (0078/2000 · B.O. 00879/2000) | comunicante Paul; "vista por último às 11h45" |
+| **Carta de Testemunho** (Margaret Whitmore) | avistamento ~11h50 no portão leste — **relato não verificado** |
+| **Alerta Amarelo / Yellow Alert** (Y-9862/2000-FICT-R1) | cartaz reemitido em 2026, com projeção de idade |
+| **Certidão de Óbito** | da **mãe, Amélie** (†1997) — **armadilha**: não é de Marie |
+| **Registro Consular — Índice de Anexos** (MC-2000-00078) | último achado (§13): o anexo **A-04 está ausente** |
+
+> Todos liberados desde o início. O conteúdo das demais fases (câmeras, Montbleu, acolhimento, projeção 2026) é **in-app** — não há documentos adicionais em PDF.
+
 ---
 
 ## 🚀 Como rodar
@@ -119,7 +133,7 @@ Depois abra:
 | Analista (Kali) | <http://localhost:5173/?kali> |
 | Atacante | <http://localhost:5173/?atc> |
 
-> O caso ativo é escolhido na tela inicial. Também dá para fixar pela URL com `&case=…` (o padrão é `case_01`). Ex.: `?investigador&case=case_02`, `?kali&case=case_02`. No `case_02`, `?atc&case=case_02` cai numa tela de "modo indisponível".
+> O caso ativo é escolhido na tela inicial. Também dá para fixar pela URL com `&case=…` (o padrão é `case_01`). Ex.: `?investigador&case=case_02`, `?kali&case=case_03`. Nos casos documentais, `?atc&case=case_02` (ou `case_03`) cai numa tela de "modo indisponível".
 >
 > 📲 Para testar no celular pelo mesmo Wi-Fi, use o endereço `Network` que o Vite mostra no terminal.
 
@@ -143,9 +157,9 @@ A pasta `dist/` é estática e pode ir para GitHub Pages, Netlify, Vercel, etc.
 | `Enter` | Recon completo |
 | `1`–`4` | Ataques simulados (senha · recuperação · engenharia social · mapa de risco) |
 
-> O Analista do `case_02` é um **painel navegável por seções** (sem esses atalhos de recon/ataque).
+> O Analista dos casos documentais (`case_02` e `case_03`) é um **painel navegável por seções** (sem esses atalhos de recon/ataque).
 
-**Modo Palestra** (botão **Projetar** — nos dois casos)
+**Modo Palestra** (botão **Projetar** — nos três casos)
 
 | Tecla | Ação |
 |:-----:|------|
@@ -179,6 +193,18 @@ Uma investigação **documental** no **Portal AICOI** (fictício): a partir de u
 
 > 📄 **Autos do caso:** para montar o inquérito (IPL) e os laudos, use os modelos editáveis em [`src/template-case/`](src/template-case/) (`.docx`) — inquérito policial, laudo IML, necropsia e laudo pericial. Preencha, exporte em PDF para a pasta `pdf/` do caso e aponte em `docs.ts`.
 
+### 🕯️ CASE #03 — 26 anos de silêncio
+
+Um **caso frio** no **Portal AICOI**: o desaparecimento de **Marie Salles** (5 anos) no Castelo Real de Londres, em 2000, reaberto 26 anos depois. É deliberadamente **inconclusivo** — o sucesso não é "achar Marie", mas **investigar com rigor e reconhecer as limitações das fontes**.
+
+| Visão | O que é no `case_03` |
+|-------|----------------------|
+| 🔍 **Investigador** | Login da AICOI → desktop com apps: **Autos**, **Fichário**, **Mensagens**, **Linha do tempo** (reconstruir a manhã → janela 11h45–11h50), **Câmeras** (puzzle das zonas de vigilância), **Análise** (classificar fato/relato/hipótese/desconhecido + comparações), **Mapa** (percursos, sem "ponto certo") e **Relatório**. As fases liberam em sequência (Atos I–IV); o fim é um **relatório graduado em 4 finais (A/B/C/D)**. |
+| 🖥️ **Analista** (`?kali`) | **Painel do Analista**: gabaritos (evidências, comparações, câmeras, acolhimento/2026, índice de anexos), **linha do tempo**, **grafo**, **finais possíveis** e **Modo Palestra**. |
+| 🎯 **Atacante** | **Bloqueado** — investigação documental, sem rota de ataque. |
+
+> Premissa pedagógica: **relato não é prova**; **semelhança não é identificação**; **projeção de idade não é retrato**; e a ausência de um documento é limitação, não evidência de encobrimento. O caso **termina aberto** — o destino de Marie permanece desconhecido.
+
 ---
 
 ## 🎨 Identidade visual
@@ -205,10 +231,10 @@ Paleta oficial, centralizada em [`src/styles/tokens.css`](src/styles/tokens.css)
 src/
   data/           tipos estáveis + fachada que serve o CASO ATIVO
   cases/          sistema de casos (registro, caso ativo, imagens)
-                  case_01/ (social) · case_02/ (documental: conclusion, messages, map, timeline, docs)
+                  case_01/ (social) · case_02/ (documental) · case_03/ (documental: evidence, cameras, map, timeline, endings, messages, docs)
   apps/           Fotogram · CorreApp · GameChat · Clue (pistas clicáveis)
-  investigador/   fluxo do celular + modo forense + dossiê · case02/ (Portal AICOI)
-  kali/           Analista: terminal, ataques e inteligência · case02/ (Painel + Palestra AICOI)
+  investigador/   fluxo do celular + modo forense + dossiê · case02/ · case03/ (Portal AICOI)
+  kali/           Analista: terminal, ataques e inteligência · case02/ · case03/ (Painel + Palestra AICOI)
   atc/            modo atacante jogável
   palestra/       Modo Palestra (projeção em telão)
   ui/             design system: ícones, Brand, EvidenceCard, Progress, grafo, timeline,
@@ -218,6 +244,7 @@ imgs/
   logos/          logo, letreiro e favicon
   case_01/        fotos + md/ e pdf/ (autos do caso)
   case_02/        logo AICOI, retrato falado, foto, stills de CCTV + md/ e pdf/
+  case_03/        foto, projeção de idade, coelho, caixa de leite, jornal + md/ e pdf/
 ```
 
 ---
@@ -237,6 +264,7 @@ imgs/
 - [x] Casos documentais (`kind: 'documental'`) + bloqueio de modo por caso
 - [x] `case_02` — Operação Baravsholov (Investigador, Analista e Palestra AICOI)
 - [x] Imagens de CCTV do `case_02` otimizadas (~300 KB cada)
+- [x] `case_03` — 26 anos de silêncio (caso frio inconclusivo: 8 fases com desbloqueio progressivo, 4 finais graduados, relatório de encerramento)
 
 **Próximos**
 
