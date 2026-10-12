@@ -17,13 +17,15 @@
 </div>
 
 > [!WARNING]
-> **Tudo aqui é ficção.** A persona *Lia Andrade*, a cidade *Vila Serrana*, os apps, as fotos, os documentos (inquérito e laudos) e todos os dados são **100% fictícios** — inclusive o cenário de crime, criado apenas como contexto de investigação. Nenhuma ferramenta real de ataque é executada. O objetivo é **conscientização sobre privacidade e educação em OSINT/forense**, não ensinar a atacar ninguém.
+> **Tudo aqui é ficção.** As personas (*Lia Andrade*; *Mirosvalikov/"Baravsholov"*), as cidades (*Vila Serrana*; *Napoli*), a agência *AICOI*, os apps, as fotos, as imagens de CCTV, os documentos (inquérito, laudos, denúncia, Red Wanted, mandado) e todos os dados são **100% fictícios** — inclusive os cenários de crime, criados apenas como contexto de investigação. Nenhuma ferramenta real de ataque é executada. O objetivo é **conscientização sobre privacidade e educação em OSINT/forense**, não ensinar a atacar ninguém.
 
 ---
 
 ## 💡 A ideia
 
-Cada investigação é um **caso**. O caso inicial — `case_01` — acompanha a apuração fictícia envolvendo **Lia Andrade**: o investigador lê os **autos oficiais** (inquérito e laudos), levanta tudo o que a vítima deixou exposto publicamente (**OSINT**) e, ao concluir, libera o **laudo pericial** final.
+Cada investigação é um **caso**, e cada caso pode ter uma natureza própria. O caso inicial — `case_01` — acompanha a apuração fictícia envolvendo **Lia Andrade**: o investigador lê os **autos oficiais** (inquérito e laudos), levanta tudo o que a vítima deixou exposto publicamente (**OSINT**) e, ao concluir, libera o **laudo pericial** final.
+
+Já o `case_02` — **Operação Baravsholov** — é um caso **documental**: no "Portal AICOI" (fictício), o investigador cruza uma denúncia anônima com Red Wanted, mandado e imagens de CCTV para **localizar um procurado a tempo**. São dois formatos sobre a mesma base: **observar, correlacionar e concluir com evidências**.
 
 No fim, fica claro o estrago que pistas soltas somadas podem causar — e, mais importante, **como cada pista poderia ter sido evitada**.
 
@@ -42,6 +44,8 @@ A tela inicial tem um **seletor de casos** → depois você escolhe a visão. As
 | 🎯 **`?atc`** *(Atacante)* | atacante jogável | computador | **9 passos de ataque** em múltipla escolha, placar e tempo, e o relatório da invasão |
 
 > 🎲 **Dinâmica sugerida:** o público joga de `?investigador` e um voluntário joga de `?atc` ao mesmo tempo — um descobre as pistas, o outro mostra o que um atacante faria com elas.
+
+> ℹ️ **As visões variam por caso.** A tabela acima descreve o `case_01`. O `case_02` reimagina cada visão como um ambiente da AICOI (veja a seção [Casos](#️-casos)) e **bloqueia o Atacante** — é uma investigação documental, sem rota jogável de ataque.
 
 ---
 
@@ -73,7 +77,9 @@ A tela inicial tem um **seletor de casos** → depois você escolhe a visão. As
 
 ## 📁 Autos do caso
 
-Documentos oficiais fictícios que acompanham a investigação (abrem em pop-up no computador e em nova aba no celular/tablet):
+Documentos oficiais fictícios que acompanham a investigação (abrem em pop-up no computador e em nova aba no celular/tablet).
+
+**`case_01` — Lia Andrade**
 
 | Documento | Quando libera |
 |-----------|---------------|
@@ -82,6 +88,16 @@ Documentos oficiais fictícios que acompanham a investigação (abrem em pop-up 
 | **Laudo Pericial** (NPD — Exame em Equipamento Computacional) | no Investigador, **após concluir** a investigação; no Analista, sempre liberado |
 
 > O Atacante não tem acesso aos autos.
+
+**`case_02` — Operação Baravsholov**
+
+| Documento | Observação |
+|-----------|------------|
+| **Registro de Denúncia Anônima** (DEN-2026-111026) | relato **não verificado** — pista, não prova |
+| **Red Wanted — Alerta Vermelho** (AICOI) | difusão do procurado internacional |
+| **Mandado de Prisão Internacional** | captura e extradição |
+
+> Todos liberados desde o início. Além dos autos, o `case_02` traz **stills de CCTV** que chegam no app de **Mensagens** e um **Fichário** (foto do rosto + retrato falado).
 
 ---
 
@@ -103,7 +119,7 @@ Depois abra:
 | Analista (Kali) | <http://localhost:5173/?kali> |
 | Atacante | <http://localhost:5173/?atc> |
 
-> O caso ativo é escolhido na tela inicial. Também dá para fixar pela URL: `?kali&case=case_01` (o padrão é `case_01`).
+> O caso ativo é escolhido na tela inicial. Também dá para fixar pela URL com `&case=…` (o padrão é `case_01`). Ex.: `?investigador&case=case_02`, `?kali&case=case_02`. No `case_02`, `?atc&case=case_02` cai numa tela de "modo indisponível".
 >
 > 📲 Para testar no celular pelo mesmo Wi-Fi, use o endereço `Network` que o Vite mostra no terminal.
 
@@ -120,14 +136,16 @@ A pasta `dist/` é estática e pode ir para GitHub Pages, Netlify, Vercel, etc.
 
 ## ⌨️ Atalhos
 
-**Analista (`?kali`)**
+**Analista do `case_01` (`?kali`)**
 
 | Tecla | Ação |
 |:-----:|------|
 | `Enter` | Recon completo |
 | `1`–`4` | Ataques simulados (senha · recuperação · engenharia social · mapa de risco) |
 
-**Modo Palestra** (botão **Projetar**)
+> O Analista do `case_02` é um **painel navegável por seções** (sem esses atalhos de recon/ataque).
+
+**Modo Palestra** (botão **Projetar** — nos dois casos)
 
 | Tecla | Ação |
 |:-----:|------|
@@ -140,15 +158,24 @@ A pasta `dist/` é estática e pode ir para GitHub Pages, Netlify, Vercel, etc.
 
 ## 🗂️ Casos
 
-Um caso é um pacote autossuficiente de dados. Para adicionar um novo (`case_02`, …):
+Um caso é um pacote autossuficiente de dados, registrado em [`src/cases/index.ts`](src/cases/index.ts). Há dois tipos:
 
-1. Coloque as fotos em `imgs/case_02/`.
-2. Crie `src/cases/case_02/` (mesma estrutura do `case_01`: `persona`, `missions`, `attackMissions`, `graph`, `docs`, `index`).
-3. Registre em [`src/cases/index.ts`](src/cases/index.ts).
+- **Caso social** (padrão, como o `case_01`): estrutura `persona`, `missions`, `attackMissions`, `graph`, `docs`, `index`; roda nas três visões clássicas (celular + Kali + Atacante).
+- **Caso documental** (`kind: 'documental'`, como o `case_02`): tem uma *surface* própria por visão e pode desativar modos (ex.: `attackerDisabled: true`).
 
-O seletor da tela inicial e as três visões passam a funcionar automaticamente com `?...&case=case_02`.
+Para adicionar um novo caso social: coloque as fotos em `imgs/case_XX/`, crie `src/cases/case_XX/` (mesma estrutura do `case_01`) e registre no índice. O seletor da tela inicial e as visões passam a funcionar com `?...&case=case_XX`.
 
-> 🕵️ **CASE #02 — Operação Baravsholov** *(em desenvolvimento)*: uma investigação **documental** no "Portal AICOI" (fictício). O Investigador analisa denúncia anônima, Red Wanted e mandado, cruza leads que chegam por mensagem e precisa **localizar o suspeito a tempo** — acertar o local abre uma janela de captura de ~3 min (capturado × fugiu). O **Analista** (`?kali`) é um *Painel do Analista AICOI*: gabarito da solução, linha do tempo, grafo de correlação, materiais (autos + CCTV) e Modo Palestra. O modo **Atacante fica bloqueado** (só neste caso).
+### 🕵️ CASE #02 — Operação Baravsholov
+
+Uma investigação **documental** no **Portal AICOI** (fictício): a partir de uma denúncia anônima, o investigador decide se um homem visto em Napoli é um procurado internacional e tenta **localizá-lo a tempo**.
+
+| Visão | O que é no `case_02` |
+|-------|----------------------|
+| 🔍 **Investigador** | Login da AICOI → desktop com apps: **Autos** (denúncia · Red Wanted · mandado), **Fichário** (foto + retrato falado), **Mensagens** (contatos com leads e CCTV), **Análise** (correlacionar atributos + classificar fato/relato/hipótese) e **Mapa**. Acertar o local abre uma **janela de captura de ~3 min** → **CAPTURADO × FUGIU** (sem pontos; decisão + rapidez definem o final). |
+| 🖥️ **Analista** (`?kali`) | **Painel do Analista AICOI**: gabarito da solução (correlação, evidências, localização, ordem de captura), **linha do tempo**, **grafo de correlação**, **materiais** (autos + CCTV) e **Modo Palestra**. |
+| 🎯 **Atacante** | **Bloqueado** só neste caso — não há rota jogável de ataque. |
+
+> Premissa pedagógica: denúncia anônima é **pista, não prova**; semelhança não é identificação; e um gesto relatado não comprova crime.
 
 > 📄 **Autos do caso:** para montar o inquérito (IPL) e os laudos, use os modelos editáveis em [`src/template-case/`](src/template-case/) (`.docx`) — inquérito policial, laudo IML, necropsia e laudo pericial. Preencha, exporte em PDF para a pasta `pdf/` do caso e aponte em `docs.ts`.
 
@@ -177,18 +204,20 @@ Paleta oficial, centralizada em [`src/styles/tokens.css`](src/styles/tokens.css)
 ```
 src/
   data/           tipos estáveis + fachada que serve o CASO ATIVO
-  cases/          sistema de casos (registro, caso ativo, imagens) + case_01/
+  cases/          sistema de casos (registro, caso ativo, imagens)
+                  case_01/ (social) · case_02/ (documental: conclusion, messages, map, timeline, docs)
   apps/           Fotogram · CorreApp · GameChat · Clue (pistas clicáveis)
-  investigador/   fluxo do celular + modo forense + dossiê
-  kali/           Analista: terminal, ataques e inteligência
+  investigador/   fluxo do celular + modo forense + dossiê · case02/ (Portal AICOI)
+  kali/           Analista: terminal, ataques e inteligência · case02/ (Painel + Palestra AICOI)
   atc/            modo atacante jogável
   palestra/       Modo Palestra (projeção em telão)
-  ui/             design system: ícones, Brand, EvidenceCard, Progress,
-                  grafo, timeline, CaseFiles (autos) + PdfModal, categorias
-  styles/         tokens (paleta oficial) + estilos por modo
+  ui/             design system: ícones, Brand, EvidenceCard, Progress, grafo, timeline,
+                  CaseFiles (autos) + PdfModal, ImageLightbox, ModeUnavailable, categorias
+  styles/         tokens (paleta oficial) + estilos por modo (case02.css, analista.css, …)
 imgs/
   logos/          logo, letreiro e favicon
   case_01/        fotos + md/ e pdf/ (autos do caso)
+  case_02/        logo AICOI, retrato falado, foto, stills de CCTV + md/ e pdf/
 ```
 
 ---
@@ -205,6 +234,9 @@ imgs/
 - [x] Pistas clicáveis nos apps
 - [x] Arquitetura de múltiplos casos (seletor + `?case=`)
 - [x] Autos do caso (PDFs com liberação condicional)
+- [x] Casos documentais (`kind: 'documental'`) + bloqueio de modo por caso
+- [x] `case_02` — Operação Baravsholov (Investigador, Analista e Palestra AICOI)
+- [x] Imagens de CCTV do `case_02` otimizadas (~300 KB cada)
 
 **Próximos**
 
