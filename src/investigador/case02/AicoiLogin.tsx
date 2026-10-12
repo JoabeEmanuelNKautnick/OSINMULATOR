@@ -21,7 +21,7 @@ export function AicoiLogin({ onEnter }: { onEnter: () => void }) {
           {logo ? <img src={logo} alt="AICOI" /> : <div className="al-logo-fallback">AICOI</div>}
         </div>
         <h1>Portal do Investigador</h1>
-        <p className="al-sub">Agência Internacional de Cooperação e Investigação (fictícia)</p>
+        <p className="al-sub">Agência de Inteligência Co-Organizacional Internacional (fictícia)</p>
 
         <label className="al-field">
           <span>Usuário</span>
