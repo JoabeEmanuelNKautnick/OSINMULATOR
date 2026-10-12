@@ -20,6 +20,13 @@ export interface Case {
   number: string        // '01'
   name: string          // nome do alvo
   city: string
+
+  /** Natureza do caso. Ausente/'social' = motor do case_01 (redes sociais, celular).
+   *  'documental' = surface própria (ex.: Portal AICOI do case_02). */
+  kind?: 'social' | 'documental'
+  /** Quando true, o modo Atacante fica indisponível apenas neste caso. */
+  attackerDisabled?: boolean
+
   imagesFolder: string  // pasta em /imgs (ex.: 'case_01')
   avatar: string        // base do arquivo do avatar (ex.: 'perfil-lia')
   photos: Record<PhotoKind, string> // PhotoKind -> base do arquivo

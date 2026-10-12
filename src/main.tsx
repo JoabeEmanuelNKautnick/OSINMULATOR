@@ -1,10 +1,13 @@
 import { StrictMode, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { Investigador } from './investigador/Investigador'
+import { InvestigadorCase02 } from './investigador/case02/InvestigadorCase02'
 import { Kali } from './kali/Kali'
 import { Atc } from './atc/Atc'
+import { ModeUnavailable } from './ui/ModeUnavailable'
 import { IconSearch, IconTerminal, IconTarget, IconShield, IconGithub, IconChevronLeft } from './ui/icons'
 import { caseList, type Case } from './cases'
+import { activeCase } from './cases/active'
 import { caseImage } from './cases/images'
 import logoUrl from '../imgs/logos/osinmulator_logo.png'
 import './styles/base.css'
@@ -32,7 +35,7 @@ function Landing() {
                 </span>
                 <span className="case-tag">CASE #{c.number}</span>
                 <b>{c.name}</b>
-                <small>{c.city} · {c.missions.length} pistas</small>
+                <small>{c.city} · {c.kind === 'documental' ? 'investigação documental' : `${c.missions.length} pistas`}</small>
               </button>
             ))}
             <div className="case-card soon"><span>+ em breve</span></div>
@@ -56,11 +59,19 @@ function Landing() {
               <b>Analista</b>
               <small>Para o palestrante. Controle a investigação, demonstre técnicas e acompanhe as evidências.</small>
             </a>
-            <a className="lc lc-atc" href={`?atc&case=${picked.id}`}>
-              <span className="lc-ico"><IconTarget size={28} /></span>
-              <b>Atacante</b>
-              <small>Para simulações controladas de ataque e demonstrações educacionais.</small>
-            </a>
+            {picked.attackerDisabled ? (
+              <div className="lc lc-atc disabled" aria-disabled="true">
+                <span className="lc-ico"><IconTarget size={28} /></span>
+                <b>Atacante</b>
+                <small>Indisponível neste caso — investigação documental, sem rota de atacante.</small>
+              </div>
+            ) : (
+              <a className="lc lc-atc" href={`?atc&case=${picked.id}`}>
+                <span className="lc-ico"><IconTarget size={28} /></span>
+                <b>Atacante</b>
+                <small>Para simulações controladas de ataque e demonstrações educacionais.</small>
+              </a>
+            )}
           </div>
         </>
       )}
@@ -75,8 +86,10 @@ function Landing() {
 
 function Router() {
   const q = window.location.search
-  if (q.includes('investigador')) return <Investigador />
-  if (q.includes('atc')) return <Atc />
+  if (q.includes('investigador')) {
+    return activeCase.kind === 'documental' ? <InvestigadorCase02 /> : <Investigador />
+  }
+  if (q.includes('atc')) return activeCase.attackerDisabled ? <ModeUnavailable /> : <Atc />
   if (q.includes('kali')) return <Kali />
   return <Landing />
 }
