@@ -1,0 +1,153 @@
+/* ============================================================
+   CASE_03 — "26 anos de silêncio". Estilos específicos dos apps
+   novos (Linha do tempo, Relatório, cena final) e dos ajustes do
+   caso frio. Reaproveita a "chrome" do SO e os apps do case02.css.
+   ============================================================ */
+
+/* Selo textual do SO (não há logo-aicoi.png neste caso) */
+.os-seal-wm {
+  position: absolute; top: 44%; left: 50%; transform: translate(-50%, -50%);
+  font-family: var(--mono); font-weight: 800; letter-spacing: .3em;
+  font-size: min(16vw, 190px); color: var(--text); opacity: .035;
+  pointer-events: none; user-select: none; z-index: 0;
+}
+.sm-seal {
+  width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center;
+  background: var(--card-2); border: 1px solid var(--border);
+  font-family: var(--mono); font-weight: 800; font-size: 11px; color: var(--cyan);
+}
+
+/* 4 opções de classificação cabem lado a lado em telas estreitas */
+.an-opts-4 .an-opt { flex: 1 1 auto; text-align: center; }
+
+/* Linha de evidência bloqueada (fases 5–8) */
+.an-row.locked { opacity: .6; border-style: dashed; }
+.an-locktag {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 8px;
+  font-size: 12px; color: var(--warn);
+}
+
+/* ===== Linha do tempo (Fase 1) ===== */
+.ln-intro {
+  display: flex; align-items: flex-start; gap: 8px; color: var(--text-2);
+  font-size: 13px; line-height: 1.5; margin-bottom: 16px; padding: 12px;
+  border-left: 3px solid var(--cyan); background: var(--card-2); border-radius: var(--r-sm);
+}
+.linha h4 { font-size: 13px; margin: 0 0 8px; color: var(--text-2); text-transform: uppercase; letter-spacing: .05em; }
+.ln-pool { margin-bottom: 18px; }
+.ln-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.ln-chip {
+  padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--r-sm);
+  background: var(--card); color: var(--text); font-size: 13px; cursor: pointer;
+}
+.ln-chip:hover { border-color: var(--cyan); }
+.ln-chip b { color: var(--cyan); font-family: var(--mono); margin-right: 4px; }
+.ln-empty { color: var(--text-3); font-size: 12.5px; }
+
+.ln-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; counter-reset: s; }
+.ln-item {
+  display: flex; align-items: center; gap: 12px; padding: 10px 12px;
+  border: 1px solid var(--border); border-radius: var(--r-md); background: var(--card);
+}
+.ln-item.ok { border-color: var(--ok); background: var(--ok-soft); }
+.ln-item.bad { border-color: var(--danger); background: var(--danger-soft); }
+.ln-item .ln-time { font-family: var(--mono); font-size: 13px; color: var(--cyan); min-width: 56px; }
+.ln-body b { font-size: 13.5px; display: block; }
+.ln-body small { font-size: 11.5px; color: var(--text-3); }
+.ln-item svg { margin-left: auto; }
+.ln-hint { color: var(--text-3); font-size: 12.5px; padding: 8px 0; }
+
+.ln-actions { display: flex; gap: 10px; margin-top: 14px; }
+.ln-btn {
+  padding: 9px 18px; border: 1px solid var(--cyan); border-radius: var(--r-sm);
+  background: var(--cyan); color: #04121a; font-weight: 700; font-size: 13px; cursor: pointer;
+}
+.ln-btn.ghost { background: none; color: var(--text-2); border-color: var(--border); font-weight: 500; }
+.ln-btn:disabled { opacity: .45; cursor: not-allowed; }
+
+.ln-feedback {
+  display: flex; align-items: center; gap: 8px; margin-top: 14px; padding: 10px 12px;
+  border-radius: var(--r-sm); font-size: 13px;
+}
+.ln-feedback.bad { background: var(--danger-soft); color: var(--danger); }
+.ln-window {
+  margin-top: 16px; padding: 14px; border: 1px solid var(--ok); border-radius: var(--r-md);
+  background: var(--ok-soft);
+}
+.ln-window h4 { color: var(--ok); text-transform: none; letter-spacing: 0; display: flex; align-items: center; gap: 7px; }
+.ln-window p { font-size: 13px; line-height: 1.5; color: var(--text); margin: 6px 0 0; }
+
+/* ===== Mapa frio (Fase 5, scaffolded) ===== */
+.mp-soon { font-size: 12px; color: var(--warn); margin: -2px 0 10px; }
+.mp-mark {
+  position: absolute; transform: translate(-50%, -50%); display: inline-flex; flex-direction: column;
+  align-items: center; color: var(--text-2); pointer-events: none;
+}
+.mp-mark em { font-size: 10.5px; font-style: normal; color: var(--text-3); white-space: nowrap; margin-top: 2px; }
+.rt-rows { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+.rt-row { padding: 12px; border: 1px solid var(--border); border-radius: var(--r-md); background: var(--card); }
+.rt-head b { font-size: 13.5px; } .rt-head small { color: var(--text-3); font-size: 12px; margin-left: 8px; }
+.rt-note { font-size: 12.5px; color: var(--text-2); margin: 8px 0 0; line-height: 1.5; }
+
+/* ===== Relatório ===== */
+.rl-intro {
+  display: flex; align-items: flex-start; gap: 8px; color: var(--text-2);
+  font-size: 13px; line-height: 1.5; margin-bottom: 14px; padding: 12px;
+  border-left: 3px solid var(--ok); background: var(--card-2); border-radius: var(--r-sm);
+}
+.rl-warn {
+  display: flex; align-items: center; gap: 8px; padding: 10px 12px; margin-bottom: 14px;
+  background: var(--warn-soft); color: var(--warn); border-radius: var(--r-sm); font-size: 13px;
+}
+.rl-review h4 { font-size: 13px; display: flex; align-items: center; gap: 8px; margin: 0 0 8px; }
+.rl-review h4 span { margin-left: auto; font-family: var(--mono); color: var(--cyan); }
+.rl-list { list-style: none; margin: 0 0 14px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.rl-item {
+  display: flex; align-items: center; gap: 12px; padding: 9px 12px;
+  border: 1px solid var(--border); border-radius: var(--r-sm); background: var(--card);
+}
+.rl-item.empty { border-style: dashed; }
+.rl-claim { font-size: 13px; flex: 1; }
+.rl-verdict { font-size: 12.5px; color: var(--cyan); font-family: var(--mono); white-space: nowrap; }
+.rl-item.empty .rl-verdict { color: var(--text-3); }
+.rl-btn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; margin-right: 10px;
+  border: 1px solid var(--border); border-radius: var(--r-sm); background: var(--card-2);
+  color: var(--text); font-size: 13px; font-weight: 600; cursor: pointer;
+}
+.rl-btn.ghost { font-weight: 500; color: var(--text-2); }
+.rl-btn.submit { background: var(--ok); border-color: var(--ok); color: #04140a; }
+.rl-btn:disabled { opacity: .45; cursor: not-allowed; }
+.rl-foot { font-size: 12px; color: var(--text-3); margin-top: 10px; }
+
+/* ===== Relatório final (bloco de encerramento) ===== */
+.ar-closing {
+  padding: 16px; border: 1px solid var(--border); border-radius: var(--r-md);
+  background: var(--card); margin-bottom: 16px;
+}
+.ar-closing h3 { font-size: 13.5px; letter-spacing: .03em; margin: 0 0 6px; }
+.ar-closing-meta { font-size: 12px; color: var(--text-3); margin: 0 0 10px; }
+.ar-closing p { font-size: 13px; line-height: 1.55; color: var(--text-2); margin: 0 0 8px; }
+.ar-closing-conc { color: var(--text) !important; border-top: 1px solid var(--border); padding-top: 8px; }
+
+.rp-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+
+/* ===== Cena final ===== */
+.rp-scene {
+  min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 16px; text-align: center; padding: 40px 20px;
+  background: radial-gradient(120% 90% at 50% 0%, #0b1420 0%, #05080f 70%);
+}
+.rp-photos { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+.rp-photos figure { margin: 0; }
+.rp-photos img {
+  width: min(38vw, 200px); aspect-ratio: 3/4; object-fit: cover;
+  border-radius: var(--r-md); border: 1px solid var(--border); filter: grayscale(.25);
+}
+.rp-photos figcaption { font-size: 12px; color: var(--text-3); margin-top: 6px; font-family: var(--mono); }
+.rp-stamp {
+  font-family: var(--mono); font-weight: 800; letter-spacing: .18em; font-size: 15px;
+  color: var(--warn); border: 1px solid var(--warn); padding: 6px 16px; border-radius: 999px; margin-top: 8px;
+}
+.rp-line { font-size: 15px; color: var(--text); max-width: 540px; }
+.rp-quote { font-size: 13.5px; font-style: italic; color: var(--text-2); max-width: 560px; line-height: 1.6; }

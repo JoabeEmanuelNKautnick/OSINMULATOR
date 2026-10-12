@@ -2,8 +2,10 @@ import { StrictMode, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { Investigador } from './investigador/Investigador'
 import { InvestigadorCase02 } from './investigador/case02/InvestigadorCase02'
+import { InvestigadorCase03 } from './investigador/case03/InvestigadorCase03'
 import { Kali } from './kali/Kali'
 import { AnalistaCase02 } from './kali/case02/AnalistaCase02'
+import { AnalistaCase03 } from './kali/case03/AnalistaCase03'
 import { Atc } from './atc/Atc'
 import { ModeUnavailable } from './ui/ModeUnavailable'
 import { IconSearch, IconTerminal, IconTarget, IconShield, IconGithub, IconChevronLeft } from './ui/icons'
@@ -88,10 +90,14 @@ function Landing() {
 function Router() {
   const q = window.location.search
   if (q.includes('investigador')) {
-    return activeCase.kind === 'documental' ? <InvestigadorCase02 /> : <Investigador />
+    if (activeCase.kind !== 'documental') return <Investigador />
+    return activeCase.id === 'case_03' ? <InvestigadorCase03 /> : <InvestigadorCase02 />
   }
   if (q.includes('atc')) return activeCase.attackerDisabled ? <ModeUnavailable /> : <Atc />
-  if (q.includes('kali')) return activeCase.kind === 'documental' ? <AnalistaCase02 /> : <Kali />
+  if (q.includes('kali')) {
+    if (activeCase.kind !== 'documental') return <Kali />
+    return activeCase.id === 'case_03' ? <AnalistaCase03 /> : <AnalistaCase02 />
+  }
   return <Landing />
 }
 
