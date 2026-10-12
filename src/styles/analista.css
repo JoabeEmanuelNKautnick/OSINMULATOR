@@ -1,0 +1,104 @@
+/* ============================================================
+   CASE_02 — Painel do Analista AICOI (modo ?kali documental)
+   ============================================================ */
+
+.anl { min-height: 100vh; display: flex; flex-direction: column; background: var(--bg); color: var(--text); }
+.anl-banner {
+  display: flex; align-items: center; gap: 8px; justify-content: center;
+  padding: 7px 12px; font-size: 12px; color: var(--warn);
+  background: var(--warn-soft); border-bottom: 1px solid color-mix(in srgb, var(--warn) 30%, transparent);
+}
+.anl-top {
+  display: flex; align-items: center; gap: 12px; padding: 10px 14px;
+  background: var(--panel); border-bottom: 1px solid var(--border);
+}
+.anl-title { font-family: var(--mono); font-size: 13px; color: var(--text-2); }
+.anl-project { margin-left: auto; display: inline-flex; align-items: center; gap: 7px; padding: 7px 14px; border: 1px solid var(--border); border-radius: var(--r-sm); background: var(--card); color: var(--text); font-size: 13px; }
+.anl-project:hover { border-color: var(--cyan); background: var(--card-2); }
+.anl-clock { font-family: var(--mono); font-size: 13px; color: var(--cyan); }
+
+.anl-body { flex: 1; display: flex; min-height: 0; }
+.anl-side { width: 240px; flex-shrink: 0; padding: 12px; overflow: auto; border-right: 1px solid var(--border); background: var(--panel); display: flex; flex-direction: column; gap: 4px; }
+.anl-navbtn { display: flex; align-items: center; gap: 9px; padding: 10px 12px; border: 1px solid transparent; border-radius: var(--r-sm); background: none; color: var(--text-2); font-size: 13px; text-align: left; }
+.anl-navbtn:hover { color: var(--text); background: var(--card); }
+.anl-navbtn.active { color: var(--text); background: var(--card-2); border-color: var(--border-2); border-left: 3px solid var(--cyan); }
+.anl-main { flex: 1; overflow: auto; padding: 22px 26px; }
+
+.anl-sec { max-width: 760px; margin: 0 auto; }
+.anl-sec h2 { font-size: 20px; margin-bottom: 10px; }
+.anl-sec h3 { font-size: 15px; margin: 18px 0 10px; color: var(--text-2); }
+.anl-lead { color: var(--text-2); line-height: 1.55; margin-bottom: 16px; padding: 12px; border-left: 3px solid var(--cyan); background: var(--card-2); border-radius: var(--r-sm); }
+.anl-tip { color: var(--text-3); font-size: 13px; margin-bottom: 12px; }
+
+.anl-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+.anl-card { padding: 14px; border: 1px solid var(--border); border-radius: var(--r-md); background: var(--card); }
+.anl-card b { display: block; margin-bottom: 6px; color: var(--cyan); font-size: 13px; }
+.anl-card p { color: var(--text-2); font-size: 13px; line-height: 1.5; }
+.anl-card.ok { border-color: color-mix(in srgb, var(--ok) 40%, transparent); background: var(--ok-soft); }
+.anl-card.ok b { color: var(--ok); }
+.anl-note { display: flex; align-items: center; gap: 8px; margin-top: 16px; padding: 11px 13px; border-radius: var(--r-md); background: var(--card-2); color: var(--text-2); font-size: 13px; }
+
+/* Linha do tempo */
+.anl-tl { list-style: none; border-left: 2px solid var(--border); margin-left: 10px; padding-left: 18px; display: flex; flex-direction: column; gap: 16px; }
+.anl-tl-item { position: relative; }
+.anl-tl-dot { position: absolute; left: -29px; top: 0; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--panel); border: 2px solid var(--nc); color: var(--nc); }
+.anl-tl-time { display: inline-block; font-family: var(--mono); font-size: 11px; color: var(--nc); margin-bottom: 2px; }
+.anl-tl-body b { display: block; font-size: 14px; }
+.anl-tl-body p { color: var(--text-2); font-size: 13px; line-height: 1.5; margin-top: 2px; }
+
+/* Grafo */
+.anl-graph-wrap { height: 560px; border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; }
+
+/* Gabaritos (linhas) */
+.anl-rows { display: flex; flex-direction: column; gap: 10px; }
+.anl-row { padding: 12px 14px; border: 1px solid var(--border); border-left-width: 3px; border-radius: var(--r-sm); background: var(--card); }
+.anl-row.truth-coincide { border-left-color: var(--ok); }
+.anl-row.truth-diverge { border-left-color: var(--warn); }
+.anl-row.truth-sem-dados { border-left-color: var(--text-3); }
+.anl-row.truth-fato { border-left-color: var(--ok); }
+.anl-row.truth-relato { border-left-color: var(--blue); }
+.anl-row.truth-hipotese { border-left-color: var(--warn); }
+.anl-row.flag { background: var(--warn-soft); }
+.anl-row-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.anl-row-top b { font-size: 13.5px; }
+.anl-badge { flex-shrink: 0; font-family: var(--mono); font-size: 11px; color: var(--text-2); background: var(--card-2); border: 1px solid var(--border); padding: 2px 9px; border-radius: 999px; }
+.anl-cmp { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 7px 0; font-size: 12.5px; color: var(--text-2); }
+.anl-cmp em { color: var(--text-3); font-style: normal; }
+.anl-rownote { font-size: 12.5px; color: var(--text-3); line-height: 1.5; }
+
+/* Localização */
+.anl-local { padding: 14px; border-radius: var(--r-md); margin-bottom: 8px; }
+.anl-local.ok { background: var(--ok-soft); border: 1px solid color-mix(in srgb, var(--ok) 40%, transparent); }
+.anl-local-top { display: flex; align-items: center; gap: 8px; color: var(--ok); }
+.anl-local-top b { font-size: 16px; } .anl-local-top span { color: var(--text-3); font-size: 12.5px; }
+.anl-local p { color: var(--text); font-size: 13px; margin-top: 6px; line-height: 1.5; }
+
+/* Critérios */
+.anl-crit { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.anl-crit li { display: flex; align-items: flex-start; gap: 8px; font-size: 13.5px; color: var(--text); }
+.anl-crit li svg { color: var(--ok); flex-shrink: 0; margin-top: 1px; }
+
+/* Materiais */
+.anl-docsbtn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 15px; border: 1px solid var(--border); border-radius: var(--r-md); background: var(--card); color: var(--text); font-size: 13.5px; }
+.anl-docsbtn:hover { border-color: var(--cyan); }
+.anl-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+.anl-thumb { display: flex; flex-direction: column; gap: 8px; padding: 10px; border: 1px solid var(--border); border-radius: var(--r-md); background: var(--card); color: var(--text); }
+.anl-thumb:hover { border-color: var(--cyan); }
+.anl-thumb img { width: 100%; aspect-ratio: 16/10; object-fit: cover; border-radius: var(--r-sm); background: #000; }
+.anl-thumb b { font-size: 12.5px; }
+
+@media (max-width: 720px) {
+  .anl-body { flex-direction: column; }
+  .anl-side { width: 100%; flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 1px solid var(--border); }
+  .anl-navbtn { white-space: nowrap; }
+}
+
+/* ===== Palestra do case_02 (extras sobre palestra.css) ===== */
+.ps-c2-tag { font-family: var(--mono); font-size: 13px; color: var(--cyan); letter-spacing: 1px; text-transform: uppercase; }
+.ps-c2-img { margin: 8px auto 4px; max-width: min(760px, 80vw); border: 1px solid var(--border-2); border-radius: var(--r-md); overflow: hidden; box-shadow: var(--shadow-2); }
+.ps-c2-img img { width: 100%; display: block; }
+.ps-c2-body { max-width: 760px; margin: 10px auto 0; font-size: clamp(16px, 2.4vw, 22px); line-height: 1.5; color: var(--text); text-align: center; }
+.ps-c2-lessons { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin: 18px 0; }
+.ps-c2-lessons div { display: flex; flex-direction: column; gap: 2px; padding: 12px 16px; background: color-mix(in srgb, var(--panel) 80%, transparent); border: 1px solid var(--border); border-radius: var(--r-md); }
+.ps-c2-lessons b { color: var(--cyan); font-size: 15px; }
+.ps-c2-lessons span { color: var(--text-2); font-size: 13px; }

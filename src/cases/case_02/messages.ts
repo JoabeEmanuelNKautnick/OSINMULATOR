@@ -6,6 +6,9 @@ export interface AicoiMessage {
   from: 'contato' | 'voce'
   text: string
   time?: string
+  /** Basename de uma imagem do caso (ex.: 'cctv' → imgs/case_02/cctv.gif) anexada à mensagem. */
+  image?: string
+  imageCaption?: string
   /** Se definido, só aparece depois de a fase indicada acontecer. */
   unlockAfter?: 'analise' | 'local'
 }
@@ -23,7 +26,7 @@ export const contacts: AicoiContact[] = [
     name: 'Coordenação AICOI',
     role: 'Supervisão do caso',
     messages: [
-      { from: 'contato', time: '07:52', text: 'Bom dia, investigador-455. Caso Baravsholov com você. Chegou uma denúncia anônima de Napoli.' },
+      { from: 'contato', time: '07:52', text: 'Bom dia, investigador-455. Caso Baravsholov com você. Chegou uma denúncia anônima (DEN-2026-111026), registrada em 03/10 às 16h40, relatando um homem na Pasticceria Buona Luce por volta das 14h20.' },
       { from: 'contato', time: '07:52', text: 'Regra de ouro: denúncia anônima é PISTA, não prova. Não trate semelhança como identidade confirmada.' },
       { from: 'voce', time: '07:53', text: 'Entendido. Vou cruzar com o Red Wanted e o mandado.' },
       { from: 'contato', time: '07:54', text: 'Isso. E cuidado com o trecho da criança: o relato descreve um gesto, não um crime. Não conclua além do que há.' },
@@ -35,10 +38,23 @@ export const contacts: AicoiContact[] = [
     name: 'Monitoramento / CFTV',
     role: 'Vigilância urbana',
     messages: [
-      { from: 'contato', time: '08:03', text: 'Rodando as câmeras com a descrição do SUV preto Mercedes-AMG G63.' },
-      { from: 'contato', time: '08:14', text: '⚑ LEAD: SUV compatível flagrado HOJE 08:12 entrando na zona portuária — bairro Artemiro Pascual.' },
-      { from: 'contato', time: '08:14', text: 'A denúncia cita rotina de café da manhã ~07h45. Procure um ponto de café recorrente nessa região.' },
-      { from: 'contato', time: '08:16', unlockAfter: 'analise', text: 'Confere no mapa os pontos da zona portuária. O avistamento da Pasticceria é antigo — ele mudou de área.' },
+      { from: 'contato', time: '08:03', text: 'Puxando o arquivo da denúncia: o fato foi relatado por volta das 14h20 de 03/10, e a denúncia entrou às 16h40. Vou confrontar com a CAM 04 da Via Leonardo DaVinci.' },
+      {
+        from: 'contato', time: '08:06',
+        text: '📹 Recon concluído. A CAM 04 marca 14:27 (03/10) — bate com o ocorrido relatado (~14h20). PRESENÇA DE MIROSVALIKOV CONFIRMADA — match facial com o procurado. É ele mesmo:',
+        image: 'Napoli CCTV_ Recon Mirosvalikov',
+        imageCaption: 'CAM 04 · Via Leonardo DaVinci · 03/10/2026 14:27 — LOCALIZADO: Mirosvalikov (Baravsholov) entrando no G63.',
+      },
+      {
+        from: 'contato', time: '08:06',
+        text: 'E o veículo no mesmo frame: Mercedes-AMG G63 preto (placa parcial "GHS") em frente à Pasticceria Buona Luce.',
+        image: 'Napoli CCTV_ G-Class Outside Pasticceria',
+        imageCaption: 'CAM 04 · Pasticceria Buona Luce (Via Leonardo DaVinci) · 03/10/2026 14:27 — Mercedes-AMG G63.',
+      },
+      { from: 'contato', time: '08:07', text: '⚠ Mas isso é o registro de 03/10, da própria denúncia. Identidade confirmada — porém NÃO é a posição atual. Rastreando onde ele está agora…' },
+      { from: 'contato', time: '08:14', text: '⚑ LEAD DE HOJE: G63 compatível (placa "GHS") flagrado às 08:12 entrando na zona portuária — bairro Artemiro Pascual.' },
+      { from: 'contato', time: '08:15', text: 'A denúncia cita café matinal recorrente ~07h45. Procure um ponto de café nessa região.' },
+      { from: 'contato', time: '08:16', unlockAfter: 'analise', text: 'Confere no mapa os pontos da zona portuária. A Pasticceria é o registro de 03/10 — ele mudou de área.' },
     ],
   },
   {

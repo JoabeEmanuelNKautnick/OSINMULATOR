@@ -120,10 +120,10 @@ export const evidences: EvidenceItem[] = [
   },
   {
     id: 'ev-horarios',
-    text: 'O homem visitava a Pasticceria às 07h45 e às 14h20.',
+    text: 'O homem visitava a Pasticceria todos os dias às 07h45 e às 14h20.',
     source: 'denuncia',
     truth: 'relato',
-    note: 'Horários são alegação da testemunha, não confirmados de forma independente.',
+    note: 'A visita de 03/10 (~14h20) é corroborada pela CAM 04 (14:27), mas a recorrência diária (07h45 e os demais dias) segue sendo relato não verificado.',
   },
   {
     id: 'ev-suv',

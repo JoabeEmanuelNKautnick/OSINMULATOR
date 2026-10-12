@@ -148,7 +148,7 @@ Um caso é um pacote autossuficiente de dados. Para adicionar um novo (`case_02`
 
 O seletor da tela inicial e as três visões passam a funcionar automaticamente com `?...&case=case_02`.
 
-> 🕵️ **CASE #02 — Operação Baravsholov** *(em desenvolvimento)*: uma investigação **documental** no "Portal AICOI" (fictício). O Investigador analisa denúncia anônima, Red Wanted e mandado, cruza leads que chegam por mensagem e precisa **localizar o suspeito a tempo** — acertar o local abre uma janela de captura de ~3 min (capturado × fugiu). Aqui o modo **Atacante fica bloqueado** (só neste caso); o Analista virá depois.
+> 🕵️ **CASE #02 — Operação Baravsholov** *(em desenvolvimento)*: uma investigação **documental** no "Portal AICOI" (fictício). O Investigador analisa denúncia anônima, Red Wanted e mandado, cruza leads que chegam por mensagem e precisa **localizar o suspeito a tempo** — acertar o local abre uma janela de captura de ~3 min (capturado × fugiu). O **Analista** (`?kali`) é um *Painel do Analista AICOI*: gabarito da solução, linha do tempo, grafo de correlação, materiais (autos + CCTV) e Modo Palestra. O modo **Atacante fica bloqueado** (só neste caso).
 
 > 📄 **Autos do caso:** para montar o inquérito (IPL) e os laudos, use os modelos editáveis em [`src/template-case/`](src/template-case/) (`.docx`) — inquérito policial, laudo IML, necropsia e laudo pericial. Preencha, exporte em PDF para a pasta `pdf/` do caso e aponte em `docs.ts`.
 
