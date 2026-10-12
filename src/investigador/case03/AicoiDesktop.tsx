@@ -4,22 +4,24 @@ import { caseImage } from '../../cases/images'
 import { CaseFiles } from '../../ui/CaseFiles'
 import { ImageLightbox } from '../../ui/ImageLightbox'
 import {
-  IconFile, IconImage, IconSearch, IconMap, IconClock, IconFolder, IconX, IconChevronRight, type Icon,
+  IconFile, IconImage, IconSearch, IconMap, IconClock, IconFolder, IconCamera, IconLock, IconX, IconChevronRight, type Icon,
 } from '../../ui/icons'
 import { MensagensApp } from './MensagensApp'
 import { LinhaApp } from './LinhaApp'
+import { CamerasApp } from './CamerasApp'
 import { AnaliseApp } from './AnaliseApp'
 import { MapApp } from './MapApp'
 import { RelatorioApp } from './RelatorioApp'
 import type { InvestState } from './InvestigadorCase03'
 
-export type AppKey = 'autos' | 'ficha' | 'mensagens' | 'linha' | 'analise' | 'mapa' | 'relatorio'
+export type AppKey = 'autos' | 'ficha' | 'mensagens' | 'linha' | 'cameras' | 'analise' | 'mapa' | 'relatorio'
 
 const APPS: { key: AppKey; name: string; desc: string; Icon: Icon; color: string }[] = [
   { key: 'autos',     name: 'Autos do caso', desc: 'Registro · Testemunho · Alerta · Óbito', Icon: IconFile,   color: '#9fb3c8' },
   { key: 'ficha',     name: 'Fichário',      desc: 'Fotos · coelho · caixa de leite',        Icon: IconImage,  color: 'var(--purple-2)' },
   { key: 'mensagens', name: 'Mensagens',     desc: 'Canal AICOI · Identificação',            Icon: IconSearch, color: 'var(--cyan)' },
   { key: 'linha',     name: 'Linha do tempo', desc: 'Reconstrua a manhã de 23/04',           Icon: IconClock,  color: 'var(--blue)' },
+  { key: 'cameras',   name: 'Câmeras',       desc: 'Vigilância do pátio (fase 4)',           Icon: IconCamera, color: 'var(--purple)' },
   { key: 'analise',   name: 'Análise',       desc: 'Classifique fato/relato/hipótese',       Icon: IconSearch, color: 'var(--blue)' },
   { key: 'mapa',      name: 'Mapa',          desc: 'Percursos no castelo (fase 5)',          Icon: IconMap,    color: 'var(--warn)' },
   { key: 'relatorio', name: 'Relatório',     desc: 'Encerre a etapa investigativa',          Icon: IconFolder, color: 'var(--ok)' },
@@ -102,8 +104,13 @@ export function AicoiDesktop({
             {openApp === 'ficha' && <Ficha />}
             {openApp === 'mensagens' && <MensagensApp invest={invest} />}
             {openApp === 'linha' && <LinhaApp invest={invest} />}
+            {openApp === 'cameras' && <CamerasApp invest={invest} />}
             {openApp === 'analise' && <AnaliseApp invest={invest} />}
-            {openApp === 'mapa' && <MapApp invest={invest} />}
+            {openApp === 'mapa' && (
+              invest.actI_II_done
+                ? <MapApp invest={invest} />
+                : <LockedApp text="Conclua o Ato I–II (linha do tempo, câmeras e toda a análise das fases 1–4) para liberar o Mapa." />
+            )}
             {openApp === 'relatorio' && <RelatorioApp invest={invest} onGoAnalise={() => setOpenApp('analise')} />}
           </div>
         </div>
@@ -152,6 +159,16 @@ export function AicoiDesktop({
           <span className="tb-clock"><b>{hh}</b><small>{dd}</small></span>
         </div>
       </div>
+    </div>
+  )
+}
+
+/** Placeholder de app ainda bloqueado por progresso. */
+function LockedApp({ text }: { text: string }) {
+  return (
+    <div className="locked-app">
+      <IconLock size={28} />
+      <p>{text}</p>
     </div>
   )
 }

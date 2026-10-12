@@ -1,9 +1,10 @@
 import {
-  evidences, comparisons, intro, ACTIVE_PHASE_MAX,
-  type EvTruth, type CmpTruth,
+  evidences, comparisons, intro,
+  montbleuFacts, acolhimentoRows, projecaoRows, matchDecisions,
+  type EvTruth, type CmpTruth, type MatchRow, type RowVerdict,
 } from '../../cases/case_03/evidence'
 import type { InvestState } from './InvestigadorCase03'
-import { IconSearch, IconLock, IconFolder } from '../../ui/icons'
+import { IconSearch, IconLock, IconFolder, IconPaw, IconMapPin, IconImage } from '../../ui/icons'
 
 const EV_OPTS: { v: EvTruth; label: string }[] = [
   { v: 'confirmado', label: 'Confirmado' },
@@ -16,12 +17,47 @@ const CMP_OPTS: { v: CmpTruth; label: string }[] = [
   { v: 'acrescentada', label: 'Acrescentada' },
   { v: 'incerta', label: 'Incerta' },
 ]
+const VERDICT_LABEL: Record<RowVerdict, string> = {
+  compativel: 'Compatível', divergente: 'Divergente', 'sem-dados': 'Sem dados',
+}
 
-/** App Análise: classificar evidências (4 valores) + comparar depoimento × anotação. */
+function MatchTable({ rows }: { rows: MatchRow[] }) {
+  return (
+    <div className="mt-table">
+      {rows.map((r) => (
+        <div key={r.id} className={'mt-row v-' + r.verdict}>
+          <b>{r.label}</b>
+          <span className="mt-marie">Marie: {r.marie}</span>
+          <span className="mt-found">Encontrado: {r.encontrado}</span>
+          <span className="mt-badge">{VERDICT_LABEL[r.verdict]}</span>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function Decision({ value, onPick }: { value?: string; onPick: (id: string) => void }) {
+  return (
+    <div className="an-opts an-opts-col">
+      {matchDecisions.map((d) => (
+        <button
+          key={d.id}
+          className={'an-opt an-opt-wide' + (value === d.id ? ' sel' : '')}
+          onClick={() => onPick(d.id)}
+        >
+          {d.label}
+        </button>
+      ))}
+    </div>
+  )
+}
+
+/** App Análise: quadro de evidências + comparações + fases 6–8 (liberadas por progresso). */
 export function AnaliseApp({ invest }: { invest: InvestState }) {
-  const evActive = evidences.filter((e) => e.phase <= ACTIVE_PHASE_MAX)
-  const evLocked = evidences.filter((e) => e.phase > ACTIVE_PHASE_MAX)
-  const cmpActive = comparisons.filter((c) => c.phase <= ACTIVE_PHASE_MAX)
+  const max = invest.unlockedMax
+  const evActive = evidences.filter((e) => e.phase <= max)
+  const evLocked = evidences.filter((e) => e.phase > max)
+  const cmpActive = comparisons
 
   const evDone = evActive.filter((e) => invest.ev[e.id]).length
   const cmpDone = cmpActive.filter((c) => invest.cmp[c.id]).length
@@ -53,7 +89,7 @@ export function AnaliseApp({ invest }: { invest: InvestState }) {
           {evLocked.map((e) => (
             <div key={e.id} className="an-row locked">
               <div className="an-row-head"><span className="an-claim">{e.text}</span></div>
-              <span className="an-locktag"><IconLock size={13} /> Disponível nas fases {e.phase}+</span>
+              <span className="an-locktag"><IconLock size={13} /> Libera na fase {e.phase}</span>
             </div>
           ))}
         </div>
@@ -81,6 +117,52 @@ export function AnaliseApp({ invest }: { invest: InvestState }) {
             </div>
           ))}
         </div>
+      </section>
+
+      {/* Fase 6 — Montbleu */}
+      <section className="an-sec">
+        <h3><IconPaw size={15} /> Fase 6 — Arquivo de Montbleu</h3>
+        {max >= 6 ? (
+          <>
+            <p className="an-tip">Registros familiares anteriores a 2000. Confirmam dados civis e o objeto — compatibilidade, não identidade.</p>
+            <ul className="mb-facts">
+              {montbleuFacts.map((f, i) => <li key={i}>{f}</li>)}
+            </ul>
+            <p className="an-tip">Classifique no quadro acima a afirmação sobre o coelho (ela já está liberada).</p>
+          </>
+        ) : (
+          <p className="an-locktag"><IconLock size={13} /> Conclua o Ato I–II para abrir o arquivo de Montbleu.</p>
+        )}
+      </section>
+
+      {/* Fase 7 — Acolhimento */}
+      <section className="an-sec">
+        <h3><IconMapPin size={15} /> Fase 7 — Ficha de acolhimento</h3>
+        {max >= 7 ? (
+          <>
+            <p className="an-tip">Um registro de menor não identificada, semanas após o desaparecimento. Compare e decida — sem transformar semelhança em identidade.</p>
+            <MatchTable rows={acolhimentoRows} />
+            <p className="an-tip">O que fazer com esta pista?</p>
+            <Decision value={invest.acolhimentoDecision} onPick={invest.setAcolhimento} />
+          </>
+        ) : (
+          <p className="an-locktag"><IconLock size={13} /> Conclua o Ato I–II para abrir a pista de acolhimento.</p>
+        )}
+      </section>
+
+      {/* Fase 8 — Projeção 2026 */}
+      <section className="an-sec">
+        <h3><IconImage size={15} /> Fase 8 — A mulher de 2026</h3>
+        {max >= 8 ? (
+          <>
+            <p className="an-tip">Projeção de envelhecimento × descrição de uma mulher adulta de um arquivo público fictício. Projeção não é retrato.</p>
+            <MatchTable rows={projecaoRows} />
+            <p className="an-tip">O que fazer com esta correspondência?</p>
+            <Decision value={invest.projecaoDecision} onPick={invest.setProjecao} />
+          </>
+        ) : (
+          <p className="an-locktag"><IconLock size={13} /> Conclua o Ato III (mapa + Montbleu + acolhimento) para abrir a fase 8.</p>
+        )}
       </section>
 
       <div className="an-foot">

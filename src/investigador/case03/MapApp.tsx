@@ -1,6 +1,6 @@
 import { landmarks, routes, type RouteVerdict } from '../../cases/case_03/map'
 import type { InvestState } from './InvestigadorCase03'
-import { IconMapPin, IconSearch } from '../../ui/icons'
+import { IconMapPin, IconSearch, IconCheck } from '../../ui/icons'
 
 const VERDICTS: { v: RouteVerdict; label: string }[] = [
   { v: 'compativel', label: 'Compatível' },
@@ -8,8 +8,10 @@ const VERDICTS: { v: RouteVerdict; label: string }[] = [
   { v: 'indeterminado', label: 'Indeterminado' },
 ]
 
-/** Fase 5 (scaffolded) — reconstrução de percursos. Sem "ponto correto", sem captura. */
+/** Fase 5 — reconstrução de percursos. Sem "ponto correto", sem captura. */
 export function MapApp({ invest }: { invest: InvestState }) {
+  const marked = routes.filter((r) => invest.routes[r.id]).length
+  const allMarked = marked === routes.length
   return (
     <div className="mapa mapa-cold">
       <p className="mp-tip">
@@ -17,7 +19,6 @@ export function MapApp({ invest }: { invest: InvestState }) {
         <b> indeterminado</b> com os documentos. Não existe um “lugar certo” — o objetivo é verificar
         possibilidades, não simular uma localização que as evidências não fornecem.
       </p>
-      <p className="mp-soon">Fase 5 · em desenvolvimento — disponível como pré-visualização.</p>
 
       <div className="mp-canvas">
         <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="mp-bg" aria-hidden="true">
@@ -68,6 +69,12 @@ export function MapApp({ invest }: { invest: InvestState }) {
           </div>
         ))}
       </div>
+
+      {allMarked ? (
+        <div className="cm-lesson"><IconCheck size={16} /><p><b>Percursos avaliados.</b> Não há registro confiável do último ponto físico em que Marie foi vista com certeza — o portão leste não se sustenta como "última localização conhecida".</p></div>
+      ) : (
+        <p className="cm-hint">Marque os {routes.length} percursos ({marked}/{routes.length}) para avançar.</p>
+      )}
     </div>
   )
 }

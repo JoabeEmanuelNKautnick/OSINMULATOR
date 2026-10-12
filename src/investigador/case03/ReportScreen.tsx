@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import {
-  evidences, comparisons, criteria, ACTIVE_PHASE_MAX,
-  type EvTruth, type CmpTruth,
+  evidences, comparisons, criteria,
+  type EvTruth, type CmpTruth, type Phase,
 } from '../../cases/case_03/evidence'
 import { closingReport, finalScene, type ReportResult } from '../../cases/case_03/endings'
 import { caseImage } from '../../cases/images'
@@ -17,11 +17,12 @@ const CMP_LABEL: Record<CmpTruth, string> = {
 }
 
 export function ReportScreen({
-  result, ev, cmp, onRestart, onReview,
+  result, ev, cmp, maxPhase, onRestart, onReview,
 }: {
   result: ReportResult
   ev: Record<string, EvTruth>
   cmp: Record<string, CmpTruth>
+  maxPhase: Phase
   onRestart: () => void
   onReview: () => void
 }) {
@@ -29,8 +30,8 @@ export function ReportScreen({
   const { ending, overclaims, correct, totalActive } = result
   const rejected = ending.rejected
 
-  const evActive = evidences.filter((e) => e.phase <= ACTIVE_PHASE_MAX)
-  const cmpActive = comparisons.filter((c) => c.phase <= ACTIVE_PHASE_MAX)
+  const evActive = evidences.filter((e) => e.phase <= maxPhase)
+  const cmpActive = comparisons.filter((c) => c.phase <= maxPhase)
   const cmpCorrect = cmpActive.filter((c) => cmp[c.id] === c.truth).length
 
   if (showScene) {
@@ -71,7 +72,12 @@ export function ReportScreen({
       {rejected && (
         <div className="ar-flag">
           <IconAlert size={16} />
-          <p><b>Relatório rejeitado:</b> você elevou uma suspeita a certeza. Reveja os itens marcados como “Confirmado” que, na verdade, são relato, hipótese ou desconhecido — e emita novamente.</p>
+          <div>
+            <p><b>Relatório rejeitado:</b> você elevou uma suspeita a certeza. Corrija e emita novamente:</p>
+            <ul className="ar-overclaims">
+              {overclaims.map((o, i) => <li key={i}>{o}</li>)}
+            </ul>
+          </div>
         </div>
       )}
 

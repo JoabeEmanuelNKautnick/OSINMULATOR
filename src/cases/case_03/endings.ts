@@ -51,11 +51,15 @@ export const endings: Record<EndingId, Ending> = {
 export interface ReportInput {
   ev: Record<string, EvTruth>
   cmp: Record<string, CmpTruth>
+  /** Decisão da Fase 7 (acolhimento): 'manter' | 'confirmar' | 'descartar'. */
+  acolhimentoDecision?: string
+  /** Decisão da Fase 8 (mulher de 2026): mesmas opções. */
+  projecaoDecision?: string
 }
 
 export interface ReportResult {
   ending: Ending
-  /** Itens em que o jogador transformou suspeita/relato em "confirmado" indevidamente. */
+  /** Rótulos dos pontos em que o jogador transformou suspeita/relato em "confirmado". */
   overclaims: string[]
   correct: number
   answered: number
@@ -63,17 +67,22 @@ export interface ReportResult {
 }
 
 /** Itens cujo exagero para "confirmado" caracteriza conclusão precipitada (Final C). */
-const OVERCLAIM_IDS = ['ev-adulto', 'ev-portao', 'ev-obito-marie', 'ev-acolhimento', 'ev-mulher2026']
+const OVERCLAIM_IDS = ['ev-adulto', 'ev-portao', 'ev-obito-marie', 'ev-acolhimento', 'ev-mulher2026', 'ev-viva']
 
-/** Gradua o relatório do jogador. `maxPhase` permite operar sobre o estado parcial (fases 1–4). */
+/** Gradua o relatório do jogador. `maxPhase` reflete até onde a investigação avançou. */
 export function computeEnding(input: ReportInput, maxPhase: Phase = ACTIVE_PHASE_MAX): ReportResult {
   const active = evidences.filter((e) => e.phase <= maxPhase)
   const totalActive = active.length
 
-  const overclaims = OVERCLAIM_IDS.filter((id) => {
+  const overclaims: string[] = []
+  for (const id of OVERCLAIM_IDS) {
     const item = evidences.find((e) => e.id === id)
-    return item && item.phase <= maxPhase && input.ev[id] === 'confirmado' && item.truth !== 'confirmado'
-  })
+    if (item && item.phase <= maxPhase && input.ev[id] === 'confirmado' && item.truth !== 'confirmado') {
+      overclaims.push(item.text)
+    }
+  }
+  if (input.acolhimentoDecision === 'confirmar') overclaims.push('Acolhimento declarado como identidade confirmada.')
+  if (input.projecaoDecision === 'confirmar') overclaims.push('Mulher de 2026 declarada como Marie.')
 
   const answered = active.filter((e) => input.ev[e.id]).length
   const correct = active.filter((e) => input.ev[e.id] === e.truth).length
@@ -83,20 +92,24 @@ export function computeEnding(input: ReportInput, maxPhase: Phase = ACTIVE_PHASE
     return { ending: endings.C, overclaims, correct, answered, totalActive }
   }
 
-  // Engajou as pistas de identidade (fases 7–8) como hipótese, sem exagerar → Final B.
-  const leadIds = ['ev-acolhimento', 'ev-mulher2026']
-  const pursuedLeads = leadIds.some((id) => {
-    const item = evidences.find((e) => e.id === id)
-    return item && item.phase <= maxPhase && input.ev[id] === 'hipotese'
-  })
-
-  // Rigor alto: respondeu tudo e acertou (quase) tudo.
   const rigorous = answered === totalActive && correct >= totalActive - 1
+  const reachedLeads = maxPhase >= 7
+  const decisionsCorrect =
+    input.acolhimentoDecision === 'manter' && input.projecaoDecision === 'manter'
+  const pursued =
+    reachedLeads && (input.acolhimentoDecision === 'manter' || input.projecaoDecision === 'manter')
 
   let ending: Ending
-  if (rigorous && pursuedLeads) ending = endings.B
-  else if (rigorous) ending = endings.A
-  else ending = endings.D
+  if (!reachedLeads) {
+    // Encerrou nos Atos I–II: só é possível A (rigoroso) ou D.
+    ending = rigorous ? endings.A : endings.D
+  } else if (rigorous && decisionsCorrect) {
+    ending = endings.A
+  } else if (pursued) {
+    ending = endings.B
+  } else {
+    ending = endings.D
+  }
 
   return { ending, overclaims, correct, answered, totalActive }
 }

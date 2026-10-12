@@ -3,8 +3,10 @@ import { activeCase } from '../../cases/active'
 import { caseImage } from '../../cases/images'
 import {
   evidences, comparisons, criteria, intro,
-  type EvTruth, type CmpTruth,
+  acolhimentoRows, projecaoRows, matchDecisions, annexItems, annexNote,
+  type EvTruth, type CmpTruth, type MatchRow,
 } from '../../cases/case_03/evidence'
+import { cameraZones, cameraStatuses, cameraLesson } from '../../cases/case_03/cameras'
 import { routes } from '../../cases/case_03/map'
 import { endings } from '../../cases/case_03/endings'
 import { timeline } from '../../cases/case_03/timeline'
@@ -23,7 +25,7 @@ import '../../styles/analista.css'
 
 type SectionKey =
   | 'resumo' | 'timeline' | 'grafo' | 'evidencias' | 'comparacoes'
-  | 'percursos' | 'finais' | 'criterios' | 'materiais'
+  | 'cameras' | 'percursos' | 'identidade' | 'anexos' | 'finais' | 'criterios' | 'materiais'
 
 const SECTIONS: { key: SectionKey; label: string; Icon: Icon }[] = [
   { key: 'resumo', label: 'Resumo', Icon: IconShield },
@@ -31,7 +33,10 @@ const SECTIONS: { key: SectionKey; label: string; Icon: Icon }[] = [
   { key: 'grafo', label: 'Grafo de correlação', Icon: IconGraph },
   { key: 'evidencias', label: 'Gabarito — evidências', Icon: IconFile },
   { key: 'comparacoes', label: 'Gabarito — comparações', Icon: IconSearch },
+  { key: 'cameras', label: 'Câmeras (fase 4)', Icon: IconFile },
   { key: 'percursos', label: 'Percursos (fase 5)', Icon: IconMapPin },
+  { key: 'identidade', label: 'Acolhimento / 2026 (7–8)', Icon: IconSearch },
+  { key: 'anexos', label: 'Índice de anexos (§13)', Icon: IconFile },
   { key: 'finais', label: 'Finais possíveis', Icon: IconFolder },
   { key: 'criterios', label: 'Critérios', Icon: IconCheck },
   { key: 'materiais', label: 'Materiais', Icon: IconImage },
@@ -81,7 +86,10 @@ export function AnalistaCase03() {
           {section === 'grafo' && <div className="anl-graph-wrap"><InvestigationGraph /></div>}
           {section === 'evidencias' && <Evidencias />}
           {section === 'comparacoes' && <Comparacoes />}
+          {section === 'cameras' && <Cameras />}
           {section === 'percursos' && <Percursos />}
+          {section === 'identidade' && <Identidade />}
+          {section === 'anexos' && <Anexos />}
           {section === 'finais' && <Finais />}
           {section === 'criterios' && <Criterios />}
           {section === 'materiais' && <Materiais onDocs={() => setShowDocs(true)} onZoom={setZoom} />}
@@ -176,6 +184,74 @@ function Percursos() {
           </div>
         ))}
       </div>
+    </div>
+  )
+}
+
+const VERDICT_LABEL: Record<MatchRow['verdict'], string> = {
+  compativel: 'Compatível', divergente: 'Divergente', 'sem-dados': 'Sem dados',
+}
+
+function GabaritoTable({ rows }: { rows: MatchRow[] }) {
+  return (
+    <div className="anl-rows">
+      {rows.map((r) => (
+        <div key={r.id} className={'anl-row truth-' + (r.verdict === 'compativel' ? 'coincide' : r.verdict === 'divergente' ? 'diverge' : 'sem-dados')}>
+          <div className="anl-row-top"><b>{r.label}</b><span className="anl-badge">{VERDICT_LABEL[r.verdict]}</span></div>
+          <div className="anl-cmp"><span><em>Marie:</em> {r.marie}</span><span><em>Encontrado:</em> {r.encontrado}</span></div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function Cameras() {
+  return (
+    <div className="anl-sec">
+      <h2>Gabarito — câmeras (Fase 4)</h2>
+      <p className="anl-tip">{cameraLesson}</p>
+      <div className="anl-rows">
+        {cameraZones.map((z) => {
+          const st = cameraStatuses.find((s) => s.id === z.correct)
+          return (
+            <div key={z.id} className="anl-row truth-coincide">
+              <div className="anl-row-top"><b>{z.label}</b><span className="anl-badge">{st?.label}</span></div>
+              <p className="anl-rownote">{z.note}</p>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+function Identidade() {
+  const correct = matchDecisions.find((d) => d.correct)!
+  return (
+    <div className="anl-sec">
+      <h2>Gabarito — acolhimento (Fase 7) e mulher de 2026 (Fase 8)</h2>
+      <p className="anl-tip">Decisão correta nas duas pistas: <b>{correct.label}</b></p>
+      <h3>Fase 7 — ficha de acolhimento</h3>
+      <GabaritoTable rows={acolhimentoRows} />
+      <h3>Fase 8 — projeção 2026 × descrição</h3>
+      <GabaritoTable rows={projecaoRows} />
+      <div className="anl-note">Marcar qualquer uma como “identidade confirmada” rejeita o relatório (Final C).</div>
+    </div>
+  )
+}
+
+function Anexos() {
+  return (
+    <div className="anl-sec">
+      <h2>§13 — Índice de anexos do registro consular (D31)</h2>
+      <div className="anl-rows">
+        {annexItems.map((a) => (
+          <div key={a.id} className={'anl-row ' + (a.present ? 'truth-coincide' : 'truth-diverge')}>
+            <div className="anl-row-top"><b>{a.id} — {a.label}</b><span className="anl-badge">{a.present ? 'Presente' : 'AUSENTE'}</span></div>
+          </div>
+        ))}
+      </div>
+      <div className="anl-note">{annexNote}</div>
     </div>
   )
 }

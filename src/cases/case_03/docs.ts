@@ -18,7 +18,8 @@ export const docs: CaseDoc[] = [
     title: 'Registro de Desaparecimento de Pessoa',
     subtitle: 'Registro nº 0078/2000 · B.O. nº 00879/2000 · comunicante: Paul H. Salles',
     org: 'Consulado Francês em Londres — Dep. de Pessoas Desaparecidas',
-    url: find('0078'),
+    // 'DESAPARECIMENTO' é único — não colide com o registro consular (MC-2000-00078).
+    url: find('DESAPARECIMENTO'),
   },
   {
     id: 'testemunho',
@@ -40,5 +41,12 @@ export const docs: CaseDoc[] = [
     subtitle: 'Amélie Salles (mãe) · †1997 · ATENÇÃO: não é certidão de Marie',
     org: 'Registro Civil das Pessoas Naturais — Montbleu/FRA',
     url: find('CERTID'),
+  },
+  {
+    id: 'consular',
+    title: 'Registro Consular — Índice de Anexos',
+    subtitle: 'Matrícula MC-2000-00078 · titular Paul H. Salles · anexo A-04 ausente',
+    org: 'Consulado Francês em Londres',
+    url: find('CONSULAR'),
   },
 ]

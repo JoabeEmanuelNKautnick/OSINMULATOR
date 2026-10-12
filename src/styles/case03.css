@@ -151,3 +151,74 @@
 }
 .rp-line { font-size: 15px; color: var(--text); max-width: 540px; }
 .rp-quote { font-size: 13.5px; font-style: italic; color: var(--text-2); max-width: 560px; line-height: 1.6; }
+
+/* ===== App bloqueado ===== */
+.locked-app {
+  display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center;
+  padding: 40px 20px; color: var(--text-2);
+}
+.locked-app svg { color: var(--warn); }
+.locked-app p { max-width: 380px; font-size: 13.5px; line-height: 1.5; }
+
+/* ===== Câmeras (Fase 4) ===== */
+.cm-intro {
+  display: flex; align-items: flex-start; gap: 8px; color: var(--text-2);
+  font-size: 13px; line-height: 1.5; margin-bottom: 14px; padding: 12px;
+  border-left: 3px solid var(--purple); background: var(--card-2); border-radius: var(--r-sm);
+}
+.cm-canvas { position: relative; width: 100%; aspect-ratio: 16/9; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; margin-bottom: 14px; }
+.cm-bg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.cm-node {
+  position: absolute; transform: translate(-50%, -50%); display: inline-flex; flex-direction: column;
+  align-items: center; gap: 2px; color: var(--text-2); padding: 4px 6px; border-radius: 8px;
+  background: color-mix(in srgb, var(--panel) 80%, transparent); border: 1px solid var(--border);
+}
+.cm-node em { font-size: 10.5px; font-style: normal; white-space: nowrap; }
+.cm-node.set { border-color: var(--cyan); color: var(--cyan); }
+.cm-node.ok { border-color: var(--ok); color: var(--ok); }
+.cm-node.bad { border-color: var(--danger); color: var(--danger); }
+.cm-rows { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+.cm-row { padding: 12px; border: 1px solid var(--border); border-radius: var(--r-md); background: var(--card); }
+.cm-row.ok { border-color: var(--ok); } .cm-row.bad { border-color: var(--danger); }
+.cm-row-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.cm-row-head b { font-size: 13.5px; } .cm-row-head svg { margin-left: auto; }
+.cm-note { font-size: 12.5px; color: var(--text-2); margin: 8px 0 0; line-height: 1.5; }
+.cm-lesson { display: flex; align-items: flex-start; gap: 8px; margin-top: 12px; padding: 12px; border: 1px solid var(--ok); border-radius: var(--r-md); background: var(--ok-soft); color: var(--text); font-size: 13px; }
+.cm-hint { display: inline-flex; align-items: center; gap: 6px; color: var(--text-3); font-size: 12.5px; margin-top: 10px; }
+
+/* ===== Opções em coluna (decisões) ===== */
+.an-opts-col { flex-direction: column; align-items: stretch; }
+.an-opt-wide { border-radius: var(--r-sm); text-align: left; padding: 10px 14px; line-height: 1.4; }
+
+/* ===== Tabela de comparação (acolhimento / 2026) ===== */
+.mt-table { display: flex; flex-direction: column; gap: 8px; margin: 8px 0 12px; }
+.mt-row {
+  display: grid; grid-template-columns: 1.1fr 1.4fr 1.4fr auto; gap: 6px 12px; align-items: center;
+  padding: 10px 12px; border: 1px solid var(--border); border-left-width: 3px; border-radius: var(--r-sm); background: var(--card);
+}
+.mt-row b { font-size: 13px; }
+.mt-marie, .mt-found { font-size: 12px; color: var(--text-2); }
+.mt-badge { font-size: 11.5px; font-family: var(--mono); color: var(--text-3); white-space: nowrap; }
+.mt-row.v-compativel { border-left-color: var(--ok); }
+.mt-row.v-divergente { border-left-color: var(--danger); }
+.mt-row.v-sem-dados { border-left-color: var(--text-3); }
+@media (max-width: 640px) { .mt-row { grid-template-columns: 1fr; } }
+
+/* ===== Montbleu ===== */
+.mb-facts { margin: 4px 0 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+.mb-facts li { font-size: 13px; color: var(--text-2); line-height: 1.5; }
+
+/* ===== Índice de anexos (§13) ===== */
+.rl-annex { margin: 16px 0; padding: 14px; border: 1px solid var(--warn); border-radius: var(--r-md); background: color-mix(in srgb, var(--warn-soft) 60%, transparent); }
+.rl-annex h4 { display: flex; align-items: center; gap: 8px; font-size: 13px; margin: 0 0 10px; }
+.ax-list { list-style: none; margin: 0 0 10px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.ax-list li { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; padding: 8px 10px; border: 1px solid var(--border); border-radius: var(--r-sm); background: var(--card); font-size: 12.5px; }
+.ax-id { font-family: var(--mono); color: var(--cyan); }
+.ax-status { font-family: var(--mono); font-size: 11.5px; color: var(--text-3); }
+.ax-list li.missing { border-color: var(--danger); background: var(--danger-soft); }
+.ax-list li.missing .ax-status { color: var(--danger); font-weight: 700; }
+.ax-note { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: var(--text-2); line-height: 1.5; margin: 0; }
+
+/* ===== Exageros no recap ===== */
+.ar-overclaims { margin: 6px 0 0; padding-left: 18px; }
+.ar-overclaims li { font-size: 12.5px; color: var(--text); margin-bottom: 3px; }
