@@ -191,7 +191,20 @@ Uma investigação **documental** no **Portal AICOI** (fictício): a partir de u
 
 > Premissa pedagógica: denúncia anônima é **pista, não prova**; semelhança não é identificação; e um gesto relatado não comprova crime.
 
-> 📄 **Autos do caso:** para montar o inquérito (IPL) e os laudos, use os modelos editáveis em [`src/template-case/`](src/template-case/) (`.docx`) — inquérito policial, laudo IML, necropsia e laudo pericial. Preencha, exporte em PDF para a pasta `pdf/` do caso e aponte em `docs.ts`.
+### 📄 Modelos de documentos
+
+Para montar os **autos** de qualquer caso, há uma biblioteca de modelos editáveis (`.docx`, todos fictícios) em [`src/template-case/`](src/template-case/), organizada por categoria:
+
+| Pasta | Modelos |
+|-------|---------|
+| **AICOI** | Alerta Amarelo (desaparecido) · Alerta Vermelho (procurado) · Mandado de Prisão Internacional |
+| **Registro Civil** | Certidão de Nascimento · Certidão de Óbito · Registro Consular |
+| **Registro Médico** | Laudo IML · Laudo IML / Necropsia |
+| **Registro Policial** | Inquérito Policial · Laudo Pericial · Registro de Prisão · Encerramento de Caso |
+| **Registro bancário** | Comprovante de Transferência |
+| **Registro de acontecimento** | Boletim de Ocorrência · Carta de Testemunho · Denúncia Anônima · Registro de Desaparecimento |
+
+> Fluxo: preencha o modelo, exporte em **PDF** para a pasta `pdf/` do caso e aponte o arquivo em `docs.ts` (o casamento é por um trecho único do nome).
 
 ### 🕯️ CASE #03 — 26 anos de silêncio
 
@@ -239,7 +252,9 @@ src/
   palestra/       Modo Palestra (projeção em telão)
   ui/             design system: ícones, Brand, EvidenceCard, Progress, grafo, timeline,
                   CaseFiles (autos) + PdfModal, ImageLightbox, ModeUnavailable, categorias
-  styles/         tokens (paleta oficial) + estilos por modo (case02.css, analista.css, …)
+  styles/         tokens (paleta oficial) + estilos por modo (case02.css, case03.css, analista.css, …)
+  template-case/  biblioteca de modelos .docx por categoria (AICOI, Registro Civil, Médico,
+                  Policial, bancário, de acontecimento) para gerar os autos em PDF
 imgs/
   logos/          logo, letreiro e favicon
   case_01/        fotos + md/ e pdf/ (autos do caso)
