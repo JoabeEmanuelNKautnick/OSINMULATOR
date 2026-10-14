@@ -114,6 +114,8 @@ Documentos oficiais fictícios que acompanham a investigação (abrem em pop-up 
 > Todos liberados desde o início. O conteúdo das demais fases (câmeras, Montbleu, acolhimento, projeção 2026) é **in-app** — não há documentos adicionais em PDF.
 
 ---
+### ▶ [Jogar agora → osinmulator.vercel.app](https://osinmulator.vercel.app)
+---
 
 ## 🚀 Como rodar
 
